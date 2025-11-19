@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 function NewProperty() {
   return (
     <div>
-      <h1 className='bg-blue-500 '>Add New Property Form</h1>
+      <h1>Add New Property Form</h1>
 
       <h2>Property Details</h2>
 
@@ -54,7 +54,7 @@ function NewProperty() {
             <SelectTrigger>
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white" >
               <SelectItem value="For Sale">For Sale</SelectItem>
               <SelectItem value="Rented">Rented</SelectItem>
             </SelectContent>
