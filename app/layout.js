@@ -10,7 +10,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <div className="flex">
+          <nav className="bg-blue-500">
+            <h1>happy</h1>
+          </nav>
+          <div>{children}</div>
+        </div>
+
       </body>
     </html>
   );

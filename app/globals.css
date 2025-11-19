@@ -1,4 +1,9 @@
-@import "tailwindcss";
+/* @import "tailwindcss"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 /* :root {
   --background: #ffffff;
@@ -45,7 +50,7 @@ a {
 
 
 
-@layer base {
+/* @layer base {
   :root {
 
     --background: 0 0% 100%;
@@ -159,4 +164,4 @@ a {
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
