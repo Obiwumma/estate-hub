@@ -10,34 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="flex">
-
-          {/* SIDEBAR */}
-          <nav className="bg-blue-500 h-screen w-72 fixed left-0 top-0 p-6 text-white">
-            <h1 className="text-2xl font-bold mb-4">EstateHub</h1>
-            <h2>happy</h2>
-          </nav>
-
-          {/* MAIN CONTENT */}
-          <div className="ml-72 w-full">
-            {/* TOP NAV */}
-            <nav className="flex p-4 justify-between shadow">
-              <div className="font-semibold">Logo EstateHub</div>
-              <div className="flex items-center gap-4">
-                <span>Agent Name</span>
-                <button className="bg-red-500 text-white px-3 py-1 rounded">
-                  Logout
-                </button>
-              </div>
-            </nav>
-
-            {/* PAGE CONTENT */}
-            <div className="p-6">
-              {children}
-            </div>
-          </div>
-        </div>
-
+        {children}
       </body>
     </html>
   );
