@@ -12,21 +12,31 @@ export default function DashboardLayout({ children }) {
         <div className="flex">
 
           {/* SIDEBAR */}
-          <nav className="bg-blue-500 h-screen w-72 fixed left-0 top-0 p-6 text-white">
-            <h1 className="text-2xl font-bold mb-4">EstateHub</h1>
-            <h2>happy</h2>
+          <nav className=" border-r text-gray-900 h-screen w-72 fixed left-0 top-0 p-6">
+            <h1 className="text-2xl font-bold mb-4">Logo EstateHub</h1>
+            <div className="h-[80%] flex flex-col justify-between mt-20 ">
+              <div>
+                <ul className="grid gap-10">
+                  <li>Dashboard</li>
+                  <li>Properties</li>
+                  <li>My Account</li>
+                  <li>Help & Support</li>
+                </ul>
+              </div>
+              <div>
+                <span>Log Out</span>
+              </div>
+            </div>
           </nav>
 
           {/* MAIN CONTENT */}
           <div className="ml-72 w-full">
             {/* TOP NAV */}
-            <nav className="flex p-4 justify-between shadow">
-              <div className="font-semibold">Logo EstateHub</div>
+            <nav className="flex p-6 justify-between shadow">
+              <div className="font-semibold">search</div>
               <div className="flex items-center gap-4">
+                <span>Notification</span>
                 <span>Agent Name</span>
-                <button className="bg-red-500 text-white px-3 py-1 rounded">
-                  Logout
-                </button>
               </div>
             </nav>
 
