@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone"
 
 function MyAccount() {
   return (
@@ -18,11 +19,11 @@ function MyAccount() {
       </header>
 
       <main>
-        <form action="">
+        <form action="" className="grid grid-cols-2 gap-y-10 gap-x-4 space-y- p-4">
           
            {/* FIRST NAME */}
                 <div>
-                  <label className="text-sm font-medium">Property Name</label>
+                  <label className="text-sm font-medium">First Name</label>
                   <Input
                     name="title"
                     placeholder="Enter the name of the property..."
@@ -32,7 +33,7 @@ function MyAccount() {
                 </div>
            {/* LAST NAME */}
                 <div>
-                  <label className="text-sm font-medium">Property Name</label>
+                  <label className="text-sm font-medium">Last Name</label>
                   <Input
                     name="title"
                     placeholder="Enter the name of the property..."
@@ -43,7 +44,7 @@ function MyAccount() {
 
            {/* COMPANY NAME */}
                 <div>
-                  <label className="text-sm font-medium">Property Name</label>
+                  <label className="text-sm font-medium">Company Name</label>
                   <Input
                     name="title"
                     placeholder="Enter the name of the property..."
@@ -54,7 +55,7 @@ function MyAccount() {
 
            {/* DATE OF BIRTH */}
                 <div>
-                  <label className="text-sm font-medium">Property Name</label>
+                  <label className="text-sm font-medium">Date of Birth</label>
                   <Input
                     name="title"
                     placeholder="Enter the name of the property..."
@@ -65,7 +66,7 @@ function MyAccount() {
                 
            {/* EMAIL */}
                 <div>
-                  <label className="text-sm font-medium">Property Name</label>
+                  <label className="text-sm font-medium">Email</label>
                   <Input
                     name="title"
                     placeholder="Enter the name of the property..."
@@ -76,15 +77,15 @@ function MyAccount() {
 
             {/* PHONE  */}
                 <div>
-                  <label className="text-sm font-medium">Phone number</label>
-                  <Input
-                    name="title"
-                    type=""
-                    placeholder="Enter the name of the property..."
+                  <label className="text-sm font-medium">Phone Number</label>
+
+                  <PhoneInput
+                    // value={form.phone}
+                    // onChange={(val) => setForm({ ...form, phone: val })}
                     className="mt-1 border-gray-300 placeholder:text-gray-500"
-                    required
                   />
                 </div>
+
 
         </form>
       </main>

@@ -9,15 +9,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function PhoneInput({ value, onChange }: any) {
+export function PhoneInput({ value, onChange }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2" >
       {/* Country Code */}
       <Select
         onValueChange={(code) => onChange({ ...value, code })}
         defaultValue={value?.code || "+234"}
       >
-        <SelectTrigger className="w-[110px]">
+        <SelectTrigger className="w-[110px]  mt-1 border-gray-300 placeholder:text-gray-500">
           <SelectValue placeholder="+234" />
         </SelectTrigger>
         <SelectContent>
@@ -35,7 +35,7 @@ export function PhoneInput({ value, onChange }: any) {
         placeholder="812 345 6789"
         value={value?.number || ""}
         onChange={(e) => onChange({ ...value, number: e.target.value })}
-        className="flex-1"
+        className="flex-1  mt-1 border-gray-300 placeholder:text-gray-500"
       />
     </div>
   );
