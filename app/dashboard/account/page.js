@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 function MyAccount() {
   return (
@@ -19,6 +20,72 @@ function MyAccount() {
       <main>
         <form action="">
           
+           {/* FIRST NAME */}
+                <div>
+                  <label className="text-sm font-medium">Property Name</label>
+                  <Input
+                    name="title"
+                    placeholder="Enter the name of the property..."
+                    className="mt-1 border-gray-300 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+           {/* LAST NAME */}
+                <div>
+                  <label className="text-sm font-medium">Property Name</label>
+                  <Input
+                    name="title"
+                    placeholder="Enter the name of the property..."
+                    className="mt-1 border-gray-300 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+
+           {/* COMPANY NAME */}
+                <div>
+                  <label className="text-sm font-medium">Property Name</label>
+                  <Input
+                    name="title"
+                    placeholder="Enter the name of the property..."
+                    className="mt-1 border-gray-300 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+
+           {/* DATE OF BIRTH */}
+                <div>
+                  <label className="text-sm font-medium">Property Name</label>
+                  <Input
+                    name="title"
+                    placeholder="Enter the name of the property..."
+                    className="mt-1 border-gray-300 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+                
+           {/* EMAIL */}
+                <div>
+                  <label className="text-sm font-medium">Property Name</label>
+                  <Input
+                    name="title"
+                    placeholder="Enter the name of the property..."
+                    className="mt-1 border-gray-300 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+
+            {/* PHONE  */}
+                <div>
+                  <label className="text-sm font-medium">Phone number</label>
+                  <Input
+                    name="title"
+                    type=""
+                    placeholder="Enter the name of the property..."
+                    className="mt-1 border-gray-300 placeholder:text-gray-500"
+                    required
+                  />
+                </div>
+
         </form>
       </main>
     </div>
