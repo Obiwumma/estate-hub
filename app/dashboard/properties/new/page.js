@@ -14,103 +14,138 @@ function NewProperty({ handleSubmit }) {
   const [images, setImages] = useState(null);
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">Add New Property Form</h1>
-
-      <h2 className="text-2xl">Property Details</h2>
-
-      <form action={handleSubmit}>
-        <div className="w-[50vw] ">
-              
-            {/* TITLE */}
-            <div className="space-y-2">
-              <label className="font-medium">Title</label>
-              <Input name="title" placeholder="3 Bedroom Flat" required />
-            </div>
-
-            {/* DESCRIPTION */}
-            <div className="space-y-2">
-              <label className="font-medium">Description</label>
-              <Textarea
-                name="description"
-                placeholder="Describe the property..."
-                required
-              />
-            </div>
-
-            {/* PRICE */}
-            <div className="space-y-2">
-              <label className="font-medium">Price (₦)</label>
-              <Input name="price" type="number" placeholder="35000000" required />
-            </div>
-
-            {/* LOCATION */}
-            <div className="space-y-2">
-              <label className="font-medium">Location</label>
-              <Input name="location" placeholder="Abuja, Nigeria" required />
-            </div>
-
-            {/* STATUS */}
-            <div className="space-y-2">
-              <label className="font-medium">Status</label>
-              <Select name="status">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent className="bg-white" >
-                  <SelectItem value="For Sale">For Sale</SelectItem>
-                  <SelectItem value="Rented">Rented</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* IMAGE UPLOAD */}
-            <div className="space-y-2">
-              <label className="font-medium">Property Images</label>
-              <div className="grid grid-cols-2 gap-5">
-                <Input
-                  className="border-dashed pt-10 pb-14"
-                  type="file"
-                  name="images"
-                  accept="image/*"
-                  multiple
-                  required
-                  onChange={(e) => setImages(e.target.files)}
-                />
-                <Input
-                  className="border-dashed pt-10 pb-14"
-                  type="file"
-                  name="images"
-                  accept="image/*"
-                  multiple
-                  required
-                  onChange={(e) => setImages(e.target.files)}
-                />
-                <Input
-                  className="border-dashed pt-10 pb-14"
-                  type="file"
-                  name="images"
-                  accept="image/*"
-                  multiple
-                  required
-                  onChange={(e) => setImages(e.target.files)}
-                />
-              </div>
-              <p className="text-sm text-muted-foreground">
-                You can upload multiple images.
-              </p>
-            </div>
-
-            {/* SUBMIT */}
-            <div className="w-full flex justify-center m-8">
-              <Button type="submit" className="w-[50%] bg-blue-500 text-white hover:bg-black">
-                Add Property
-              </Button>
-            </div>
-
-        </div>
-      </form>
+   <div className="w-full flex justify-center py-10">
+  <div className="w-[60vw] bg-white shadow-sm rounded-xl p-10">
+    
+    {/* HEADER */}
+    <div className="mb-8">
+      <h1 className="text-2xl font-bold">Register your property</h1>
     </div>
+
+    {/* FORM */}
+    <form action={handleSubmit} className="space-y-6">
+
+      {/* PROPERTY NAME */}
+      <div>
+        <label className="text-sm font-medium">Property Name</label>
+        <Input
+          name="title"
+          placeholder="Enter the name of the property..."
+          className="mt-1 border-gray-300 placeholder:text-gray-500"
+          required
+        />
+      </div>
+
+      {/* PROPERTY ADDRESS */}
+      <div>
+        <label className="text-sm font-medium">Price (₦)</label>
+        <Input
+        type="number"
+          name="location"
+          placeholder="Enter the price of the property..."
+          className="mt-1 border-gray-300 placeholder:text-gray-500"
+          required
+        />
+      </div>
+
+      {/* Price */}
+      <div>
+        <label className="text-sm font-medium">Property Address</label>
+        <Input
+          name="price"
+          placeholder="Enter the address of the property..."
+          className="mt-1 border-gray-300 placeholder:text-gray-500"
+          required
+        />
+      </div>
+
+      {/* PROPERTY TYPE */}
+      <div>
+        <label className="text-sm font-medium">Property Type</label>
+        <Select name="status">
+          <SelectTrigger className="mt-1 border-gray-300 placeholder:text-gray-500">
+            <SelectValue  placeholder="Select the type of property (For Sale, Rented)..." />
+          </SelectTrigger>
+          <SelectContent className="bg-white ">
+            
+            <SelectItem value="Commercial">For Sale</SelectItem>
+            <SelectItem value="Industrial">Rented</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* DATES */}
+      {/* <div className="grid grid-cols-2 gap-6">
+        <div>
+          <label className="text-sm font-medium">Date of Purchase</label>
+          <Input type="date" name="purchaseDate" className="mt-1 border-gray-300" />
+        </div>
+
+        <div>
+          <label className="text-sm font-medium">Date of Last Renovation</label>
+          <Input type="date" name="renovationDate" className="mt-1" />
+        </div>
+      </div> */}
+
+      {/* DESCRIPTION */}
+      <div>
+        <label className="text-sm font-medium">Description</label>
+        <Textarea
+          name="description"
+          placeholder="Write a brief description of the property, including any notable features or history..."
+          className="mt-1 border-gray-300 placeholder:text-gray-500"
+          required
+        />
+      </div>
+
+      {/* IMAGES */}
+      <div>
+        <label className="text-sm font-medium">Property Images</label>
+
+        <div className="grid grid-cols-3 gap-4 mt-2">
+          <Input
+            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
+            type="file"
+            name="images"
+            accept="image/*"
+            multiple
+            onChange={(e) => setImages(e.target.files)}
+          />
+
+          <Input
+            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
+            type="file"
+            name="images"
+            accept="image/*"
+            multiple
+            onChange={(e) => setImages(e.target.files)}
+          />
+
+          <Input
+            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
+            type="file"
+            name="images"
+            accept="image/*"
+            multiple
+            onChange={(e) => setImages(e.target.files)}
+          />
+        </div>
+
+        <p className="text-sm text-gray-500 mt-1">You can upload multiple images.</p>
+      </div>
+
+      {/* BUTTONS */}
+      <div className="flex justify-end pt-4">
+        <Button className="bg-purple-600 text-white px-6 py-2 hover:bg-purple-700 rounded">
+          Register property
+        </Button>
+
+      </div>
+
+    </form>
+  </div>
+</div>
+
   )
 }
 

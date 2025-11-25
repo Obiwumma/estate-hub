@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }) {
         <div className="flex">
 
           {/* SIDEBAR */}
-          <nav className=" border-r text-gray-900 h-screen w-72 fixed left-0 top-0 p-6">
+          <nav className=" border-r text-gray-900 h-screen w-64 fixed left-0 top-0 p-6">
             <h1 className="text-2xl font-bold mb-4">Logo EstateHub</h1>
             <div className="h-[80%] flex flex-col justify-between mt-20 ">
               <div>
@@ -30,7 +30,7 @@ export default function DashboardLayout({ children }) {
           </nav>
 
           {/* MAIN CONTENT */}
-          <div className="ml-72 w-full">
+          <div className="ml-64 w-full">
             {/* TOP NAV */}
             <nav className="flex p-6 justify-between shadow">
               <div className="font-semibold">search</div>

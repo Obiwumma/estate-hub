@@ -53,50 +53,50 @@ function PropertiesList() {
 
       <main>
         <div className='grid grid-cols-4 gap-10 justify-evenly'>
-          <Card className="min-w-60" >
-            <CardHeader><Image alt='property image' src={"/ahouse.jpg"} width={200} height={200} ></Image> </CardHeader>
+          <Card className="min-w-52" >
+            <CardHeader><Image alt='property image' src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
             <CardContent>St.George Bayfont</CardContent>
             <CardContent>Washington DC</CardContent>
-            <div className='flex'>
+            {/* <div className='flex'>
               <CardFooter>3 bedrooms </CardFooter>
               <CardFooter>2 bathrooms</CardFooter>
-            </div>
+            </div> */}
             <hr />
             <CardContent>$4000 Read More</CardContent>
           </Card>
 
-          <Card className="min-w-60" >
-            <CardHeader><Image src={"/ahouse.jpg"} width={200} height={200} ></Image> </CardHeader>
+          <Card className="min-w-52" >
+            <CardHeader><Image src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
             <CardContent>St.George Bayfont</CardContent>
             <CardContent>Washington DC</CardContent>
-            <div className='flex'>
+            {/* <div className='flex'>
               <CardFooter>3 bedrooms </CardFooter>
               <CardFooter>2 bathrooms</CardFooter>
-            </div>
+            </div> */}
             <hr />
             <CardContent>$4000 Read More</CardContent>
           </Card>
 
-          <Card className="min-w-60" >
-            <CardHeader><Image src={"/ahouse.jpg"} width={200} height={200} ></Image> </CardHeader>
+          <Card className="min-w-52" >
+            <CardHeader><Image src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
             <CardContent>St.George Bayfont</CardContent>
             <CardContent>Washington DC</CardContent>
-            <div className='flex'>
+            {/* <div className='flex'>
               <CardFooter>3 bedrooms </CardFooter>
               <CardFooter>2 bathrooms</CardFooter>
-            </div>
+            </div> */}
             <hr />
             <CardContent>$4000 Read More</CardContent>
           </Card>
 
-          <Card className="min-w-60" >
-            <CardHeader><Image src={"/ahouse.jpg"} width={200} height={200} ></Image> </CardHeader>
+          <Card className="min-w-52" >
+            <CardHeader><Image src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
             <CardContent>St.George Bayfont</CardContent>
             <CardContent>Washington DC</CardContent>
-            <div className='flex'>
+            {/* <div className='flex'>
               <CardFooter>3 bedrooms </CardFooter>
               <CardFooter>2 bathrooms</CardFooter>
-            </div>
+            </div> */}
             <hr />
             <CardContent>$4000 Read More</CardContent>
           </Card>
