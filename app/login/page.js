@@ -6,20 +6,21 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import LoginButton from "../_components/LoginButton"
 
 
 function LoginPage() {
-  async function signInWithGoogle() {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-        queryParams: { prompt: "select_account" },
-        flowType: "pkce",
-      }
-    })
-  }
+  // async function signInWithGoogle() {
+  //   const supabase = createClient();
+  //   await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: `${location.origin}/auth/callback`,
+  //       queryParams: { prompt: "select_account" },
+  //       flowType: "pkce",
+  //     }
+  //   })
+  // }
   return (
     <div className="flex flex-col  justify-enter h-screen gap-4">
 
@@ -83,12 +84,9 @@ function LoginPage() {
             <p>or</p>
           </div>
 
-          <button 
-            onClick={signInWithGoogle}
-            className="px-4 py-2 text-gray-600 border-2 rounded"
-          >
-            Continue with Google
-          </button>
+          
+            <LoginButton/>
+          
 
         </div>
        

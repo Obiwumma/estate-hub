@@ -1,48 +1,43 @@
 // app/auth/callback/route.js
 import { NextResponse } from 'next/server'
-// import { cookies } from 'next/headers'
-import { createServerSupabaseClient } from '@/lib/supabase/server.server'
+import { createClient } from '@/utils/supabase/server'
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url)
+  const requestUrl = new URL(request.url)
+  const { searchParams, origin } = requestUrl
+
   const code = searchParams.get('code')
+  let next = searchParams.get('next') ?? '/'
 
-//   if (!code) {
-//     return NextResponse.json({ error: "No code provided" }, { status: 400 })
-//   }
-
-//   const supabase = createServerSupabaseClient()
-
-//   try {
-//     const { error } = await supabase.auth.exchangeCodeForSession(code)
-
-//     if (error) {
-//       console.error("Supabase session error:", error)
-//       return NextResponse.json({ error: error.message }, { status: 500 })
-//     }
-//   } catch (err) {
-//     console.error("Callback crash:", err)
-//     return NextResponse.json({ error: err.message }, { status: 400 })
-//   }
-
-//   return NextResponse.redirect('/dashboard')
-// }
-
-
-
-if (!code) {
-    return NextResponse.json({ error: 'No code provided' }, { status: 400 })
+  // Ensure next is a relative path (security)
+  if (!next.startsWith('/')) {
+    next = '/'
   }
 
-  // Don't read cookies() here — let the function do it
-  const supabase = createServerSupabaseClient()
+  // If we have an auth code, exchange it for a session
+  if (code) {
+    const supabase = await createClient()
 
-  const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { error } = await supabase.auth.exchangeCodeForSession(code)
 
-  if (error) {
-    console.error('Supabase exchange error:', error)
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    if (!error) {
+      // Redirect handling for local dev vs production (Vercel, etc.)
+      const forwardedHost = request.headers.get('x-forwarded-host')
+      const isLocalEnv = process.env.NODE_ENV === 'development'
+
+      if (isLocalEnv) {
+        // Localhost — use origin directly
+        return NextResponse.redirect(`${origin}${next}`)
+      } else if (forwardedHost) {
+        // Production behind proxy/load balancer (e.g. Vercel)
+        return NextResponse.redirect(`https://${forwardedHost}${next}`)
+      } else {
+        // Fallback
+        return NextResponse.redirect(`${origin}${next}`)
+      }
+    }
   }
 
-  return NextResponse.redirect(new URL('/dashboard', request.url))
+  // If no code or exchange failed → go to error page
+  return NextResponse.redirect(`${origin}/auth/auth-code-error`)
 }
