@@ -1,20 +1,24 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "../../lib/supabase/server.server.js"; // Your client import
 import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
   const router = useRouter();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await supabase.auth.signOut({ scope: 'local' }); // Clears localStorage + cookies
     router.push("/login");
-    router.refresh(); // important: clears server cache
+    router.refresh(); // Re-runs server logic, invalidates cache
+    window.location.href = "/login"; // Hard redirect as backup (clears any lingering state)
   };
 
   return (
-    <button onClick={handleLogout} className="px-4 py-2 bg-red-600 text-white rounded">
+    <button 
+      onClick={handleLogout} 
+      className="px-3 py-2 bg-red-500 text-white rounded-md"
+    >
       Logout
     </button>
   );

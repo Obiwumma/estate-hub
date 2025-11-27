@@ -1,6 +1,6 @@
 "use client"
 
-import { supabase } from "../_lib/supabase"
+import { createClient } from "@/lib/supabase/client"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 
 function LoginPage() {
   async function signInWithGoogle() {
+    const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
