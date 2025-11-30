@@ -1,27 +1,25 @@
-// components/RequireAuth.js
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { createClient } from "@/lib/supabase/client";
 
-export default function RequireAuth({ children }) {
-  const { data: session, status } = useSession();
+export default function AuthGuard({ children }) {
+  const supabase = createClient();
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        router.push("/login"); // redirect if not logged in
+      } else {
+        setLoading(false); // user is authenticated
+      }
+    });
+  }, []);
 
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <div>Loading...</div>;
 
-  if (!session) {
-    return null;
-  }
-
-  return <>{children}</>;
+  return children;
 }

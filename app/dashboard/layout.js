@@ -1,6 +1,6 @@
 
 // import "./globals.css";
-import LogoutButton from "../_components/LogoutButton";
+// import LogoutButton from "../_components/LogoutButton";
 
 export const metadata = {
   title: "Create Next App",
@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }) {
                 </ul>
               </div>
               <div>
-                <LogoutButton/>
+                {/* <LogoutButton/> */}
               </div>
             </div>
           </nav>
