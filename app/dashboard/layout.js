@@ -1,6 +1,7 @@
 
 // import "./globals.css";
 // import LogoutButton from "../_components/LogoutButton";
+import AuthGuard from "../_components/AuthGuard";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,44 +11,46 @@ export const metadata = {
 export default function DashboardLayout({ children }) {
   return (
       
-        <div className="flex">
+        <AuthGuard>
+          <div className="flex">
 
-          {/* SIDEBAR */}
-          <nav className=" border-r text-gray-900 h-screen w-64 fixed left-0 top-0 p-6">
-            <h1 className="text-2xl font-bold mb-4">Logo EstateHub</h1>
-            <div className="h-[80%] flex flex-col justify-between mt-20 ">
-              <div>
-                <ul className="grid gap-10">
-                  <li>Dashboard</li>
-                  <li>Properties</li>
-                  <li>My Account</li>
-                  <li>Help & Support</li>
-                </ul>
-              </div>
-              <div>
-                {/* <LogoutButton/> */}
-              </div>
-            </div>
-          </nav>
-
-          {/* MAIN CONTENT */}
-          <div className="ml-64 w-full">
-            {/* TOP NAV */}
-            <nav className="flex p-6 justify-between shadow">
-              <div className="font-semibold">search</div>
-              <div className="flex items-center gap-4">
-                <span>Notification</span>
-                <span>Agent Name</span>
+            {/* SIDEBAR */}
+            <nav className=" border-r text-gray-900 h-screen w-64 fixed left-0 top-0 p-6">
+              <h1 className="text-2xl font-bold mb-4">Logo EstateHub</h1>
+              <div className="h-[80%] flex flex-col justify-between mt-20 ">
+                <div>
+                  <ul className="grid gap-10">
+                    <li>Dashboard</li>
+                    <li>Properties</li>
+                    <li>My Account</li>
+                    <li>Help & Support</li>
+                  </ul>
+                </div>
+                <div>
+                  {/* <LogoutButton/> */}
+                </div>
               </div>
             </nav>
 
-            {/* PAGE CONTENT */}
-            <div className="p-6">
-              {children}
+            {/* MAIN CONTENT */}
+            <div className="ml-64 w-full">
+              {/* TOP NAV */}
+              <nav className="flex p-6 justify-between shadow">
+                <div className="font-semibold">search</div>
+                <div className="flex items-center gap-4">
+                  <span>Notification</span>
+                  <span>Agent Name</span>
+                </div>
+              </nav>
+
+              {/* PAGE CONTENT */}
+              <div className="p-6">
+                {children}
+              </div>
             </div>
           </div>
-        </div>
 
+        </AuthGuard>
     
   );
 }
