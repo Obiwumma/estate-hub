@@ -1,6 +1,6 @@
 
 // import "./globals.css";
-// import LogoutButton from "../_components/LogoutButton";
+import LogoutButton from "../_components/LogoutButton";
 import AuthGuard from "../_components/AuthGuard";
 
 export const metadata = {
@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }) {
                   </ul>
                 </div>
                 <div>
-                  {/* <LogoutButton/> */}
+                  <LogoutButton/>
                 </div>
               </div>
             </nav>
