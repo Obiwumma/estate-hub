@@ -1,13 +1,11 @@
 "use client";
-
-import { createBrowserClient } from '@supabase/auth-helpers-nextjs';
+import { supabase } from "@/lib/supabase/client";
 
 export default function LogoutButton() {
-  const supabase = createBrowserClient();
 
   async function handleLogout() {
     await supabase.auth.signOut({ scope: "local" }); 
-    window.location.href = "/auth/login"; // redirect after logout
+    window.location.href = "/login"; // redirect after logout
   }
 
   return (
