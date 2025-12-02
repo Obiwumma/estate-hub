@@ -2,20 +2,52 @@
 
 import { useState } from "react";
 
-import { Card } from "@/components/ui/card"
-import { Form } from "@/components/ui/form"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { uploadFile } from "@/lib/action";
+import { supabase } from "@/lib/supabase/client";
 
 function NewProperty({ handleSubmit }) {
   const [images, setImages] = useState(null);
 
+  async function handleSubmit(e) {
+  e.preventDefault()
+
+    const formData = new FormData(event.target);
+
+    const title = formData.get("title");
+    const price = formData.get("price");
+    const location = formData.get("location");
+    const description = formData.get("description");
+    const status = formData.get("status");
+
+
+    const uploadedImages = [];
+
+    for (let i = 0; i < images.length; i++) {
+      const url = await uploadFile(images[i]);
+      if (url) uploadedImages.push(url);
+    }
+
+  await supabase.from("properties").insert({
+    title,
+    price,
+    location,
+    description,
+    status,
+    images: uploadedImages
+  })
+
+  alert("Property registered successfully!");
+
+}
+
+
   return (
    <div className="w-full flex justify-center py-10">
-  <div className="w-[60vw] bg-white shadow-sm rounded-xl p-10">
+    <div className="w-[60vw] bg-white shadow-sm rounded-xl p-10">
     
     {/* HEADER */}
     <div className="mb-8">
@@ -23,7 +55,7 @@ function NewProperty({ handleSubmit }) {
     </div>
 
     {/* FORM */}
-    <form action={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
 
       {/* PROPERTY NAME */}
       <div>
@@ -102,33 +134,16 @@ function NewProperty({ handleSubmit }) {
       <div>
         <label className="text-sm font-medium">Property Images</label>
 
-        <div className="grid grid-cols-3 gap-4 mt-2">
+        <div className="grid  mt-2">
           <Input
-            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
             type="file"
             name="images"
             accept="image/*"
             multiple
             onChange={(e) => setImages(e.target.files)}
+            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
           />
 
-          <Input
-            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
-            type="file"
-            name="images"
-            accept="image/*"
-            multiple
-            onChange={(e) => setImages(e.target.files)}
-          />
-
-          <Input
-            className="border-dashed text-gray-500 border-gray-500 pt-10 pb-14 h-[140px]"
-            type="file"
-            name="images"
-            accept="image/*"
-            multiple
-            onChange={(e) => setImages(e.target.files)}
-          />
         </div>
 
         <p className="text-sm text-gray-500 mt-1">You can upload multiple images.</p>
