@@ -4,12 +4,30 @@ import { useState } from "react";
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 import LoginButton from "../_components/LoginButton"
-import SignupButton from "../_components/SignupButton";
+import { signUp } from "@/lib/action";
 
 
 function SignupPage() {
+  const [message, setMessage] = useState("");
+  const router = useRouter()
+
+  async function handleSubmit(e) {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const res = await signUp(formData);
+
+  if (res.error) {
+    setMessage(res.error);
+  } else {
+    setMessage("Signup successful! Please check your email.");
+    router.push("/login")
+  }
+  console.log(message);
   
+}
   return (
     <div className="flex flex-col  justify-enter h-screen gap-4">
 
@@ -29,7 +47,7 @@ function SignupPage() {
           <h1 className="text-2xl text-purple-950 font-semibold">Create your EstateHub account</h1>
           <p className="text-sm text-gray-500">Sign up to get started</p>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
 
             {/* full name */}
             <div>
@@ -78,18 +96,20 @@ function SignupPage() {
                   required
                 />
               </div>
-          </form>
 
-          <div className="flex justify-between items-center text-sm text-gray-500 ">
-            <div className="flex gap-2 items-center">
-              <input type="checkbox" required />
-              <label htmlFor="">I agree to the terms & conditions</label>
+            <div className="flex justify-between items-center text-sm text-gray-500 ">
+              <div className="flex gap-2 items-center">
+                <input type="checkbox" required />
+                <label htmlFor="">I agree to the terms & conditions</label>
+              </div>
             </div>
-          </div>
 
-          <div className="flex pt-4">
-            <SignupButton/>
-          </div>
+            <div className="flex pt-4">
+              <button type="submit" className="bg-purple-600 text-white px-6 py-5 hover:bg-purple-700 rounded w-full">
+                Sign Up
+              </button>
+            </div>
+          </form>
 
           <div className="flex items-center justify-center">
             <p>or</p>

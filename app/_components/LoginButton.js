@@ -1,7 +1,6 @@
 "use client";
 
 import { supabase } from '@/lib/supabase/client';
-import { signInWithGoogle } from '@/lib/action';
 import React from 'react'
 
 function LoginButton() {
