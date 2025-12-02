@@ -1,26 +1,36 @@
 "use client"
 
-import { createClient } from "@/lib/supabase/client"
+import { useState } from "react";
+
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import LoginButton from "../_components/LoginButton"
+import { signIn } from "@/lib/action";
+import { useRouter } from "next/navigation";
 
 
 function LoginPage() {
-  // async function signInWithGoogle() {
-  //   const supabase = createClient();
-  //   await supabase.auth.signInWithOAuth({
-  //     provider: "google",
-  //     options: {
-  //       redirectTo: `${location.origin}/auth/callback`,
-  //       queryParams: { prompt: "select_account" },
-  //       flowType: "pkce",
-  //     }
-  //   })
-  // }
+  const [message, setMessage] = useState("");
+  const router = useRouter()
+
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    const formData = new FormData(e.target);
+    const res = await signIn(formData);
+    
+    if (res.error) {
+    setMessage(res.error);
+  } else {
+    setMessage("Signin successful! ...");
+    router.push("/dashboard")
+  }
+  console.log(message);
+
+    
+  }
   return (
     <div className="flex flex-col  justify-enter h-screen gap-4">
 
@@ -40,7 +50,7 @@ function LoginPage() {
           <h1 className="text-2xl text-purple-950 font-semibold">Welcome back to EstateHub!</h1>
           <p className="text-sm text-gray-500">Sign into you account</p>
 
-          <form  className="space-y-6">
+          <form  className="space-y-6" onSubmit={handleSubmit}>
           
                 {/* sign in field */}
                 <div>
@@ -63,23 +73,23 @@ function LoginPage() {
                     required
                   />
                 </div>
-          </form>   
 
-          <div className="flex justify-between items-center text-sm text-gray-500 ">
-            <div className="flex gap-2 items-center">
-              <input type="checkbox" />
-              <label htmlFor="">Remember me</label>
+            <div className="flex justify-between items-center text-sm text-gray-500 ">
+              <div className="flex gap-2 items-center">
+                <input type="checkbox" />
+                <label htmlFor="">Remember me</label>
+              </div>
+              <span>Forgot Password?</span>
             </div>
-            <span>Forgot Password?</span>
-          </div>
 
-          <div className="flex -center pt-4">
-            <Button className="bg-purple-600 text-white px-6 py-5 hover:bg-purple-700 rounded w-full">
-              Login
-            </Button>
+            <div className="flex -center pt-4">
+              <Button type="submit" className="bg-purple-600 text-white px-6 py-5 hover:bg-purple-700 rounded w-full">
+                Login
+              </Button>
 
-          </div>
+            </div>
 
+          </form>   
           <div className="flex items-center justify-center">
             <p>or</p>
           </div>
