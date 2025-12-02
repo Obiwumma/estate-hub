@@ -1,26 +1,15 @@
 "use client"
 
-import { createClient } from "@/lib/supabase/client"
+import { useState } from "react";
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import LoginButton from "../_components/LoginButton"
+import SignupButton from "../_components/SignupButton";
 
 
 function SignupPage() {
-  // async function signInWithGoogle() {
-  //   const supabase = createClient();
-  //   await supabase.auth.signInWithOAuth({
-  //     provider: "google",
-  //     options: {
-  //       redirectTo: `${location.origin}/auth/callback`,
-  //       queryParams: { prompt: "select_account" },
-  //       flowType: "pkce",
-  //     }
-  //   })
-  // }
+  
   return (
     <div className="flex flex-col  justify-enter h-screen gap-4">
 
@@ -99,9 +88,7 @@ function SignupPage() {
           </div>
 
           <div className="flex pt-4">
-            <Button className="bg-purple-600 text-white px-6 py-5 hover:bg-purple-700 rounded w-full">
-              Sign Up
-            </Button>
+            <SignupButton/>
           </div>
 
           <div className="flex items-center justify-center">
