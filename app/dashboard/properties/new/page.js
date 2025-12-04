@@ -52,7 +52,7 @@ function NewProperty({ handleSubmit }) {
         <label className="text-sm font-medium">Price (₦)</label>
         <Input
         type="number"
-          name="location"
+          name="price"
           placeholder="Enter the price of the property..."
           className="mt-1 border-gray-300 placeholder:text-gray-500"
           required
@@ -63,7 +63,7 @@ function NewProperty({ handleSubmit }) {
       <div>
         <label className="text-sm font-medium">Property Address</label>
         <Input
-          name="price"
+          name="location"
           placeholder="Enter the address of the property..."
           className="mt-1 border-gray-300 placeholder:text-gray-500"
           required
@@ -79,8 +79,8 @@ function NewProperty({ handleSubmit }) {
           </SelectTrigger>
           <SelectContent className="bg-white ">
             
-            <SelectItem value="Commercial">For Sale</SelectItem>
-            <SelectItem value="Industrial">Rented</SelectItem>
+            <SelectItem value="Sale">For Sale</SelectItem>
+            <SelectItem value="Rented">Rented</SelectItem>
           </SelectContent>
         </Select>
       </div>
