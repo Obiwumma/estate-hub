@@ -6,43 +6,22 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input";
-import { uploadFile } from "@/lib/action";
+import { addProperty } from "@/lib/action";
 import { supabase } from "@/lib/supabase/client";
 
 function NewProperty({ handleSubmit }) {
+  const [loading, setLoading] = useState(false);
   const [images, setImages] = useState(null);
 
-  async function handleSubmit(e) {
-  e.preventDefault()
+  function handleSubmit(e) {
+    e.preventDefault()
+    setLoading(true);
 
-    const formData = new FormData(event.target);
+    const formData = new FormData(e.target);
+    addProperty(formData)
+  }
 
-    const title = formData.get("title");
-    const price = formData.get("price");
-    const location = formData.get("location");
-    const description = formData.get("description");
-    const status = formData.get("status");
-
-
-    const uploadedImages = [];
-
-    for (let i = 0; i < images.length; i++) {
-      const url = await uploadFile(images[i]);
-      if (url) uploadedImages.push(url);
-    }
-
-  await supabase.from("properties").insert({
-    title,
-    price,
-    location,
-    description,
-    status,
-    images: uploadedImages
-  })
-
-  alert("Property registered successfully!");
-
-}
+  
 
 
   return (
