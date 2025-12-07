@@ -1,10 +1,35 @@
-import React from 'react'
+"use client"
+
+import { useEffect, useState } from "react";
+import { createServerSupabaseClient } from "@/lib/supabase/server.server";
 import { Button } from '@/components/ui/button'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
 
 function PropertiesList() {
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const supabase = createServerSupabaseClient()
+
+  useEffect(() => {
+    async function load() {
+      const { data } = await supabase
+        .from("properties")
+        .select("*");
+
+      setProperties(data || []);
+      setLoading(false);
+    }
+
+    load();
+  }, []);
+
+  console.log(properties);
+  
+
+  if (loading) return <p>Loading...</p>;
+
   return (
     <div className='text-gray-800'>
       <header className='flex justify-between'>
@@ -53,8 +78,24 @@ function PropertiesList() {
 
       <main>
         <div className='grid grid-cols-4 gap-10 justify-evenly'>
+
+          {properties.map((p) => (
+
+            <Card className="min-w-52" key={p.id} >
+              <CardHeader><Image  src={JSON.parse(p.image_url)[0]} alt='A house' width={200} height={200} ></Image> </CardHeader>
+              <CardContent>{p.title}</CardContent>
+              <CardContent>{p.location}</CardContent>
+              {/* <div className='flex'>
+                <CardFooter>3 bedrooms </CardFooter>
+                <CardFooter>2 bathrooms</CardFooter>
+              </div> */}
+              <hr />
+              <CardContent>${p.price} Read More</CardContent>
+            </Card>
+          ))}
+
           <Card className="min-w-52" >
-            <CardHeader><Image alt='property image' src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
+            <CardHeader><Image  src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
             <CardContent>St.George Bayfont</CardContent>
             <CardContent>Washington DC</CardContent>
             {/* <div className='flex'>
@@ -65,41 +106,6 @@ function PropertiesList() {
             <CardContent>$4000 Read More</CardContent>
           </Card>
 
-          <Card className="min-w-52" >
-            <CardHeader><Image src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
-            <CardContent>St.George Bayfont</CardContent>
-            <CardContent>Washington DC</CardContent>
-            {/* <div className='flex'>
-              <CardFooter>3 bedrooms </CardFooter>
-              <CardFooter>2 bathrooms</CardFooter>
-            </div> */}
-            <hr />
-            <CardContent>$4000 Read More</CardContent>
-          </Card>
-
-          <Card className="min-w-52" >
-            <CardHeader><Image src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
-            <CardContent>St.George Bayfont</CardContent>
-            <CardContent>Washington DC</CardContent>
-            {/* <div className='flex'>
-              <CardFooter>3 bedrooms </CardFooter>
-              <CardFooter>2 bathrooms</CardFooter>
-            </div> */}
-            <hr />
-            <CardContent>$4000 Read More</CardContent>
-          </Card>
-
-          <Card className="min-w-52" >
-            <CardHeader><Image src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
-            <CardContent>St.George Bayfont</CardContent>
-            <CardContent>Washington DC</CardContent>
-            {/* <div className='flex'>
-              <CardFooter>3 bedrooms </CardFooter>
-              <CardFooter>2 bathrooms</CardFooter>
-            </div> */}
-            <hr />
-            <CardContent>$4000 Read More</CardContent>
-          </Card>
         </div>
       </main>
     </div>
