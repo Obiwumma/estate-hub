@@ -11,7 +11,7 @@ export const metadata = {
 export default function DashboardLayout({ children }) {
   return (
       
-        <AuthGuard>
+        <>
           <div className="flex">
 
             {/* SIDEBAR */}
@@ -50,7 +50,7 @@ export default function DashboardLayout({ children }) {
             </div>
           </div>
 
-        </AuthGuard>
+        </>
     
   );
 }

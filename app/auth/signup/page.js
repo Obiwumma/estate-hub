@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import LoginButton from "../_components/LoginButton"
+import LoginButton from "../../_components/LoginButton"
 import { signUp } from "@/lib/action";
 
 

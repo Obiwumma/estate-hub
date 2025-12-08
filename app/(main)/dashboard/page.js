@@ -1,7 +1,7 @@
 "use client";
 
 
-import AuthGuard from "../_components/AuthGuard";
+import AuthGuard from "../../_components/AuthGuard";
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 
 export default function DashboardPage() {

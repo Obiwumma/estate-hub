@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
-import LoginButton from "../_components/LoginButton"
+import LoginButton from "../../_components/LoginButton"
 import { signIn } from "@/lib/action";
 import { useRouter } from "next/navigation";
 
