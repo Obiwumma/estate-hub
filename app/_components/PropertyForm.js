@@ -1,5 +1,6 @@
+"use client"
 
-
+import { useState } from "react"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -7,9 +8,27 @@ import { Input } from "@/components/ui/input";
 import { addProperty } from "@/lib/action";
 import { supabase } from "@/lib/supabase/client";
 
-function PropertyForm() {
+function PropertyForm( { mode = "create", property } ) {
+  const [loading, setLoading] = useState(false);
+  const [images, setImages] = useState(null);
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+
+    if (mode === "create") {
+      await addProperty(formData);
+    } else if (mode === "edit") {
+      formData.append("propertyId", property.id);
+      await updateProperty(formData);
+    }
+  }
+
   return (
-    <div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
       {/* PROPERTY NAME */}
       <div>
         <label className="text-sm font-medium">Property Name</label>
@@ -109,7 +128,8 @@ function PropertyForm() {
         </Button>
 
       </div>
-    </div>
+      </div>
+    </form>
   )
 }
 

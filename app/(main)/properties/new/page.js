@@ -7,18 +7,7 @@ import { addProperty } from "@/lib/action";
 import { supabase } from "@/lib/supabase/client";
 
 
-function NewProperty({ handleSubmit }) {
-  const [loading, setLoading] = useState(false);
-  const [images, setImages] = useState(null);
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    setLoading(true);
-
-    const formData = new FormData(e.target);
-    addProperty(formData)
-  }
-
+function NewProperty({ }) {
   
 
 
@@ -32,11 +21,9 @@ function NewProperty({ handleSubmit }) {
     </div>
 
     {/* FORM */}
-    <form onSubmit={handleSubmit} className="space-y-6">
+      <PropertyForm mode="create"/>
 
-      <PropertyForm/>
-
-    </form>
+  
   </div>
 </div>
 
