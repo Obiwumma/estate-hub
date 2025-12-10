@@ -126,7 +126,7 @@ function PropertyForm( { mode = "create", property } ) {
 
       {/* BUTTONS */}
       <div className="flex justify-end pt-4">
-        <Button className="bg-purple-600 text-white px-6 py-2 hover:bg-purple-700 rounded">
+        <Button disabled={loading} className={`bg-purple-600 text-white px-6 py-2 hover:bg-purple-700 rounded ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
           Register property
         </Button>
 
