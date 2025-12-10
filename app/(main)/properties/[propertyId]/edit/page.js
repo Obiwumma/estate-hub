@@ -2,18 +2,19 @@
 import React from 'react'
 import { createServerSupabaseClient } from '@/lib/supabase/server.server';
 import PropertyForm from '@/app/_components/PropertyForm';
-import { updateProperty } from '@/lib/action';
+import { getPropertyById } from '@/lib/action';
 
 async function EditForm({params}) {
-  const supabase = createServerSupabaseClient()
+  const{ propertyId } = await params
 
-  const {data: property} = await supabase
-  .from("properties")
-  .select("*")
-  .eq("id", params.propertyId)
-  .single();
-
-  // if (error) console.log(error);
+  console.log("Fetching ID:", propertyId);
+  
+  const property = await getPropertyById(propertyId);
+  console.log("Loaded property:", property);
+  
+  if (!property) {
+    return <div>Property not found</div>;
+  }
 
   return (
    <div className="w-full flex justify-center py-10">

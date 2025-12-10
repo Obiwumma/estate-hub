@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input";
 import { addProperty } from "@/lib/action";
+import { updateProperty } from "@/lib/action"
 import { supabase } from "@/lib/supabase/client";
 
 function PropertyForm( { mode = "create", property } ) {
