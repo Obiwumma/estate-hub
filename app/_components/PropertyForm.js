@@ -19,10 +19,12 @@ function PropertyForm( { mode = "create", property } ) {
 
     const formData = new FormData(e.target);
 
+    const dataToUpdate = Object.fromEntries(formData)
+
     if (mode === "create") {
       await addProperty(formData);
     } else if (mode === "edit") {
-      formData.append("propertyId", property.id);
+      formData.append("id", property.id);
       await updateProperty(formData);
     }
   }
