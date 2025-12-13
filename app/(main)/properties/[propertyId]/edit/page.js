@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { createServerSupabaseClient } from '@/lib/supabase/server.server';
 import PropertyForm from '@/app/_components/PropertyForm';
 import { getPropertyById } from '@/lib/action';
 

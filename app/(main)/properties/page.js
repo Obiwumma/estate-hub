@@ -6,11 +6,35 @@ import { Button } from '@/components/ui/button'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
+import { deleteProperty } from "@/lib/action";
 
 function PropertiesList() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const supabase = createServerSupabaseClient()
+
+
+  async function deleteProperty(id) {
+    const confirmDelete = window.confirm("Are you sure you want to delete this property?");
+    if (!confirmDelete) return;
+  
+    // 1. Delete from Supabase
+    const { error } = await supabase
+      .from("properties")
+      .delete()
+      .eq("id", id);
+  
+    if (error) {
+      console.error("Error deleting:", error);
+      alert("Could not delete property");
+    } else {
+      // 2. If successful, remove it from the screen immediately
+      // This filters out the property with the matching ID
+      setProperties((prevProperties) => prevProperties.filter((p) => p.id !== id));
+      
+      alert("Deleted successfully");
+    }
+  }
 
   useEffect(() => {
     async function load() {
@@ -90,7 +114,8 @@ function PropertiesList() {
                 <CardFooter>2 bathrooms</CardFooter>
               </div> */}
               <hr />
-              <CardContent>${p.price} Read More</CardContent>
+              <CardContent className="flex text-xs justify-between" >${p.price} Read More <button onClick={() => deleteProperty(p.id)} >Delete</button></CardContent> 
+              
             </Card>
           ))}
 
