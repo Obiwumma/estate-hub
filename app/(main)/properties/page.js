@@ -32,7 +32,7 @@ function PropertiesList() {
       // This filters out the property with the matching ID
       setProperties((prevProperties) => prevProperties.filter((p) => p.id !== id));
       
-      alert("Deleted successfully");
+      // alert("Deleted successfully");
     }
   }
 
