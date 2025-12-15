@@ -67,7 +67,7 @@ export default function MyPropertiesPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
       </div>
     );
   }
@@ -82,7 +82,7 @@ export default function MyPropertiesPage() {
         </div>
         <Link 
           href="/properties/new" 
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors flex items-center gap-2"
+          className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded font-medium transition-colors flex items-center gap-2"
         >
           <span>+</span> Create New Listing
         </Link>
@@ -94,7 +94,7 @@ export default function MyPropertiesPage() {
           // Empty State
           <div className="text-center py-12">
             <p className="text-gray-500 mb-4">You haven't posted any properties yet.</p>
-            <Link href="/properties/new" className="text-blue-600 font-medium hover:underline">
+            <Link href="/properties/new" className="text-purple-600 font-medium hover:underline">
               Create your first listing &rarr;
             </Link>
           </div>
