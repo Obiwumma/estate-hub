@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation'; // To get the ID from URL
-import { createBrowserSupabaseClient } from '@/utils/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import Image from 'next/image';
 import LeadGate from '@/app/_components/LeadGate';
 
@@ -9,7 +9,6 @@ export default function PropertyDetail() {
   const { propertyId } = useParams(); // Matches the folder name [propertyId]
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
-  const supabase = createBrowserSupabaseClient();
 
   useEffect(() => {
     async function fetchProperty() {

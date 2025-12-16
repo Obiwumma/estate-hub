@@ -1,13 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { createBrowserSupabaseClient } from '@/utils/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button'; // Or your button component
 
 export default function LeadGate({ agentName, agentPhone, agentEmail }) {
   const [user, setUser] = useState(null);
   const [revealed, setRevealed] = useState(false);
-  const supabase = createBrowserSupabaseClient();
   const router = useRouter();
 
   useEffect(() => {
