@@ -7,6 +7,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
 import { deleteProperty } from "@/lib/action";
+import Link from "next/link";
 
 function PropertiesList() {
   const [properties, setProperties] = useState([]);
@@ -40,7 +41,8 @@ function PropertiesList() {
     async function load() {
       const { data } = await supabase
         .from("properties")
-        .select("*");
+        .select("*")
+        .in('status', ['sale', 'rent']);
 
       setProperties(data || []);
       setLoading(false);
@@ -69,7 +71,7 @@ function PropertiesList() {
                 </SelectTrigger>
                 <SelectContent className="bg-white" >
                   <SelectItem value="For Sale">For Sale</SelectItem>
-                  <SelectItem value="Rented">Rented</SelectItem>
+                  <SelectItem value="Rented">For Rent</SelectItem>
                 </SelectContent>
               </Select>
         </div>
@@ -101,36 +103,42 @@ function PropertiesList() {
       </nav>
 
       <main>
-        <div className='grid grid-cols-4 gap-10 justify-evenly'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
+          {properties.map((p) => {
+            // Safety check for images
+            const images = p.image_url ? JSON.parse(p.image_url) : [];
+            const mainImage = images[0] || '/placeholder.jpg';
 
-          {properties.map((p) => (
-
-            <Card className="min-w-52" key={p.id} >
-              <CardHeader><Image  src={JSON.parse(p.image_url)[0]} alt='A house' width={200} height={200} ></Image> </CardHeader>
-              <CardContent>{p.title}</CardContent>
-              <CardContent>{p.location}</CardContent>
-              {/* <div className='flex'>
-                <CardFooter>3 bedrooms </CardFooter>
-                <CardFooter>2 bathrooms</CardFooter>
-              </div> */}
-              <hr />
-              <CardContent className="flex text-xs justify-between" >${p.price} Read More <button onClick={() => deleteProperty(p.id)} >Delete</button></CardContent> 
-              
-            </Card>
-          ))}
-
-          <Card className="min-w-52" >
-            <CardHeader><Image  src={"/ahouse.jpg"} alt='A house' width={200} height={200} ></Image> </CardHeader>
-            <CardContent>St.George Bayfont</CardContent>
-            <CardContent>Washington DC</CardContent>
-            {/* <div className='flex'>
-              <CardFooter>3 bedrooms </CardFooter>
-              <CardFooter>2 bathrooms</CardFooter>
-            </div> */}
-            <hr />
-            <CardContent>$4000 Read More</CardContent>
-          </Card>
-
+            return (
+              <Card className="min-w-52 hover:shadow-lg transition-shadow" key={p.id}>
+                <CardHeader className="p-0">
+                  <div className="relative h-48 w-full">
+                     <Image 
+                       src={mainImage} 
+                       alt={p.title} 
+                       fill 
+                       className="object-cover rounded-t-xl"
+                     />
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-4">
+                  <h3 className="font-bold text-lg truncate">{p.title}</h3>
+                  <p className="text-gray-500 text-sm">{p.location}</p>
+                </CardContent>
+                <hr />
+                <CardContent className="flex items-center justify-between p-4">
+                  <span className="font-bold text-purple-600">${p.price}</span>
+                  
+                  {/* LINK TO DETAIL PAGE */}
+                  <Link href={`/properties/${p.id}`}>
+                    <button className="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded">
+                      Read More
+                    </button>
+                  </Link>
+                </CardContent> 
+              </Card>
+            )
+          })}
         </div>
       </main>
     </div>
