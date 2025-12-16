@@ -44,8 +44,8 @@ export default function LeadGate({ agentName, agentPhone, agentEmail }) {
           Contact Agent
         </Button>
       ) : (
-        <div className="bg-green-50 p-4 rounded-lg border border-green-200 text-left space-y-2 animate-in fade-in">
-          <p className="text-sm font-bold text-green-800">✅ Contact Info Unlocked</p>
+        <div className="bg-purple-50 p-4 rounded-lg border border-purple-200 text-left space-y-2 animate-in fade-in">
+          <p className="text-sm font-bold text-purple-800">✅ Contact Info Unlocked</p>
           <p>📞 <a href={`tel:${agentPhone}`} className="hover:underline">{agentPhone}</a></p>
           <p>✉️ <a href={`mailto:${agentEmail}`} className="hover:underline">{agentEmail}</a></p>
         </div>
