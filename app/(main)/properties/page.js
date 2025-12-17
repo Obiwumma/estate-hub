@@ -89,27 +89,39 @@ function PropertiesList() {
         <Button className="bg-purple-600 text-white rounded px-5 py-5 " > + Add Property</Button>
       </header>
 
-      <nav className='bg-white p-6 flex gap-10 rounded-xl mt-5 mb-10'>
-        <div>
-          <Select  name="status" onValueChange={(val) => setFilter(val)}>
-                <SelectTrigger className="rounded min-w-28 border-gray-300">
-                  <SelectValue placeholder="All" />
-                </SelectTrigger>
-                <SelectContent className="bg-white" >
-                  <SelectItem value="all">All</SelectItem>
-                  <SelectItem value="sale">For Sale</SelectItem>
-                  <SelectItem value="rent">For Rent</SelectItem>
-                </SelectContent>
-              </Select>
-        </div>
-        <div>
-          <div className="flex w-full max-w-sm items-center gap-2">
-            <Input type="text" placeholder="Search for property..." onChange={(e) => setSearch(e.target.value)} className="rounded min-w-28 border-gray-300" />
-            <Button  className="bg-purple-600  text-white rounded px-5 py-4 " type="submit" variant="outline">
-              Search
-            </Button>
-          </div>
-          
+      <nav className='bg-white p-6 rounded-xl mt-5 mb-10 shadow-sm border border-gray-100'>
+  
+        {/* Container: Stacks on phone, Row on Desktop */}
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between"> 
+            
+            {/* 1. SEARCH BAR (Left Side) */}
+            <div className="relative w-full md:w-1/3">
+              {/* Visual Icon inside the input */}
+              <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                🔍
+              </div>
+              <Input 
+                  type="text" 
+                  placeholder="Search property title..." 
+                  onChange={(e) => setSearch(e.target.value)} 
+                  className="pl-10 rounded border-gray-300 w-full" 
+              />
+            </div>
+
+            {/* 2. FILTER DROPDOWN (Right Side) */}
+            <div className="w-full md:w-auto">
+                <Select name="status" onValueChange={setFilter}>
+                  <SelectTrigger className="w-full md:w-[180px] rounded border-gray-300">
+                      <SelectValue placeholder="Filter by Status" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                      <SelectItem value="all">Show All</SelectItem>
+                      <SelectItem value="sale">For Sale</SelectItem>
+                      <SelectItem value="rent">For Rent</SelectItem>
+                  </SelectContent>
+                </Select>
+            </div>
+
         </div>
       </nav>
 
