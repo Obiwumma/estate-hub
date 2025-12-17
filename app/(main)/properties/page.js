@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createServerSupabaseClient } from "@/lib/supabase/server.server";
 import { Button } from '@/components/ui/button'
+import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import Image from 'next/image';
@@ -13,6 +14,8 @@ function PropertiesList() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all")
+  const [search, setSearch] = useState("")
+  const [finalInput, setFinalInput] = useState("")
   const supabase = createServerSupabaseClient()
 
 
@@ -48,6 +51,8 @@ function PropertiesList() {
           else if (filter == "rent") query.eq("status", "rent")
             else query.in("status", ['sale', 'rent'])
 
+        if (search) query.ilike("title", `%${search}%`)
+
       const { data } = await query
 
       // const { data } = await supabase
@@ -60,11 +65,20 @@ function PropertiesList() {
     }
 
     load();
-  }, [filter]);
+  }, [filter, finalInput]);
+
+  useEffect(() => {
+    const theOutput = setTimeout(() => {
+      setFinalInput(search)
+    }, 500);
+
+    return () => {
+    clearTimeout(theOutput); // This cancels the previous timer
+  };
+  }, [search])
 
 
   console.log(properties);
-  
 
   if (loading) return <p>Loading...</p>;
 
@@ -77,8 +91,8 @@ function PropertiesList() {
 
       <nav className='bg-white p-6 flex gap-10 rounded-xl mt-5 mb-10'>
         <div>
-          <Select name="status" onValueChange={(val) => setFilter(val)}>
-                <SelectTrigger className="rounded border-gray-300">
+          <Select  name="status" onValueChange={(val) => setFilter(val)}>
+                <SelectTrigger className="rounded min-w-28 border-gray-300">
                   <SelectValue placeholder="All" />
                 </SelectTrigger>
                 <SelectContent className="bg-white" >
@@ -89,29 +103,13 @@ function PropertiesList() {
               </Select>
         </div>
         <div>
-          <Select name="status"  >
-                <SelectTrigger className="rounded border-gray-300">
-                  <SelectValue placeholder="Property Type" />
-                </SelectTrigger>
-                <SelectContent className="bg-white" >
-                  <SelectItem value="For Sale">For Sale</SelectItem>
-                  <SelectItem value="Rented">Rented</SelectItem>
-                </SelectContent>
-              </Select>
-        </div>
-        <div>
-          <Select name="status">
-                <SelectTrigger className="rounded border-gray-300">
-                  <SelectValue placeholder="Location" />
-                </SelectTrigger>
-                <SelectContent className="bg-white" >
-                  <SelectItem value="For Sale">For Sale</SelectItem>
-                  <SelectItem value="Rented">Rented</SelectItem>
-                </SelectContent>
-              </Select>
-        </div>
-        <div>
-          <Button className="bg-purple-600 text-white rounded px-5 py-4 " >Search</Button>
+          <div className="flex w-full max-w-sm items-center gap-2">
+            <Input type="text" placeholder="Search for property..." onChange={(e) => setSearch(e.target.value)} className="rounded min-w-28 border-gray-300" />
+            <Button  className="bg-purple-600  text-white rounded px-5 py-4 " type="submit" variant="outline">
+              Search
+            </Button>
+          </div>
+          
         </div>
       </nav>
 
