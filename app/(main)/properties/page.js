@@ -12,6 +12,7 @@ import Link from "next/link";
 function PropertiesList() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all")
   const supabase = createServerSupabaseClient()
 
 
@@ -39,17 +40,28 @@ function PropertiesList() {
 
   useEffect(() => {
     async function load() {
-      const { data } = await supabase
+      let query = supabase
         .from("properties")
         .select("*")
-        .in('status', ['sale', 'rent']);
+
+        if (filter == "sale") query.eq("status", "sale")
+          else if (filter == "rent") query.eq("status", "rent")
+            else query.in("status", ['sale', 'rent'])
+
+      const { data } = await query
+
+      // const { data } = await supabase
+      //   .from("properties")
+      //   .select("*")
+      //   .in('status', ['sale', 'rent']);
 
       setProperties(data || []);
       setLoading(false);
     }
 
     load();
-  }, []);
+  }, [filter]);
+
 
   console.log(properties);
   
@@ -65,13 +77,14 @@ function PropertiesList() {
 
       <nav className='bg-white p-6 flex gap-10 rounded-xl mt-5 mb-10'>
         <div>
-          <Select name="status">
+          <Select name="status" onValueChange={(val) => setFilter(val)}>
                 <SelectTrigger className="rounded border-gray-300">
-                  <SelectValue placeholder="Rent Property" />
+                  <SelectValue placeholder="All" />
                 </SelectTrigger>
                 <SelectContent className="bg-white" >
-                  <SelectItem value="For Sale">For Sale</SelectItem>
-                  <SelectItem value="Rented">For Rent</SelectItem>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="sale">For Sale</SelectItem>
+                  <SelectItem value="rent">For Rent</SelectItem>
                 </SelectContent>
               </Select>
         </div>
