@@ -6,7 +6,7 @@ export default function AccountLayout({ children }) {
         <Card className="flex">
 
           {/* SIDEBAR */}
-          <nav className=" text-gray-900 w-[50%] py-7 px-6">
+          <nav className=" text-gray-900 w-[300px] py-7 px-6">
             
             <div className=" flex flex-col justify-between ">
               <div>
