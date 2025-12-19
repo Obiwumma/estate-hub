@@ -6,6 +6,7 @@ import AccountForm from "@/app/_components/AccountForm"
 function MyAccount() {
   return (
     <div>
+      <AccountForm/>
     </div>
   )
 }
