@@ -6,12 +6,17 @@ import { Label } from "@/components/ui/label"
 import { PhoneInput } from "@/components/ui/phone" // Ensure you have this installed
 import { useRef, useState } from "react"
 
-export default function AccountForm() {
+export default function AccountForm({ user }) {
   // Reference to trigger the hidden file input
   const fileInputRef = useRef(null)
   
   // Optional: State to show a preview if they select a new image immediately
-  const [previewImage, setPreviewImage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVOFbZqiasFsHd64783jnQfZCv3dGp0kh0fQ&s")
+  const defaultImage = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+  const [previewImage, setPreviewImage] = useState(user?.avatar_url || defaultImage)
+
+  const displayName = user?.first_name && user?.last_name 
+    ? `${user.first_name} ${user.last_name}` 
+    : user?.email || "Your Profile";
 
   const handleImageClick = () => {
     fileInputRef.current.click()
@@ -40,9 +45,9 @@ export default function AccountForm() {
         </div>
         
         <div className="flex flex-col gap-2 text-center sm:text-left w-full">
-          <h1 className="text-lg font-bold text-gray-900">Cristiano Ronaldo</h1>
+          <h1 className="text-lg font-bold text-gray-900">{displayName}</h1>
           <p className="text-sm text-gray-500">
-            Recommended: 500x500px (JPG, PNG)
+            {user?.email || "No email found"}
           </p>
           
           <div className="mt-1">
@@ -99,15 +104,6 @@ export default function AccountForm() {
             />
           </div>
 
-          {/* DATE OF BIRTH */}
-          <div className="space-y-2">
-            <Label className="text-sm font-medium">Date of Birth</Label>
-            <Input
-              type="date"
-              name="dob"
-              className="border-gray-300 block w-full focus-visible:ring-purple-500"
-            />
-          </div>
           
           {/* EMAIL (Read Only) */}
           <div className="space-y-2">

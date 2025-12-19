@@ -4,9 +4,11 @@ import { PhoneInput } from "@/components/ui/phone"
 import AccountForm from "@/app/_components/AccountForm"
 
 function MyAccount() {
+
+  
   return (
     <div>
-      <AccountForm/>
+      <AccountForm user={mockUser}/>
     </div>
   )
 }
