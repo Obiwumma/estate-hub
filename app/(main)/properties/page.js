@@ -139,8 +139,11 @@ function PropertiesList() {
                      <Image 
                        src={mainImage} 
                        alt={p.title} 
-                       fill 
+                       fill
                        className="object-cover rounded-t-xl"
+                      //  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      // unoptimized={true}
+                       quality={80}
                      />
                   </div>
                 </CardHeader>
