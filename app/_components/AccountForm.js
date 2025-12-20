@@ -5,28 +5,71 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { PhoneInput } from "@/components/ui/phone" // Ensure you have this installed
 import { useRef, useState } from "react"
+import { supabase } from "@/lib/supabase/client"
 
 export default function AccountForm({ user }) {
-  // Reference to trigger the hidden file input
-  const fileInputRef = useRef(null)
+const fileInputRef = useRef(null)
+  const [isLoading, setIsLoading] = useState(false)
   
-  // Optional: State to show a preview if they select a new image immediately
-  const defaultImage = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541"
+  // State for image preview
+  const defaultImage = "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
   const [previewImage, setPreviewImage] = useState(user?.avatar_url || defaultImage)
+
+  // State for Phone Number (PhoneInput works best with state)
+  const [phone, setPhone] = useState(user?.phone_number || "")
 
   const displayName = user?.first_name && user?.last_name 
     ? `${user.first_name} ${user.last_name}` 
     : user?.email || "Your Profile";
 
-  const handleImageClick = () => {
-    fileInputRef.current.click()
-  }
+  const handleImageClick = () => fileInputRef.current.click()
 
   const handleFileChange = (event) => {
     const file = event.target.files[0]
-    if (file) {
-      setPreviewImage(URL.createObjectURL(file))
+    if (file) setPreviewImage(URL.createObjectURL(file))
+    // Note: Actual image upload logic would go here later
+  }
+
+  // --- THE NEW UPDATE FUNCTION (Client-Side) ---
+  const handleSubmit = async (e) => {
+    e.preventDefault() // Stop page reload
+    setIsLoading(true)
+
+    // 1. Get current user again to be safe
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+    
+    if (!currentUser) {
+       alert("You must be logged in to save.")
+       setIsLoading(false)
+       return
     }
+
+    // 2. Gather form data
+    const formData = new FormData(e.target)
+    
+    const updates = {
+      id: currentUser.id, // Primary Key matches Auth ID
+      first_name: formData.get("firstName"),
+      last_name: formData.get("lastName"),
+      company_name: formData.get("companyName"),
+      date_of_birth: formData.get("dob"),
+      phone_number: phone, // From state
+      updated_at: new Date(),
+    }
+
+    // 3. Send to Supabase directly
+    const { error } = await supabase
+      .from('profiles')
+      .upsert(updates) // .upsert() creates if missing, updates if exists
+
+    if (error) {
+      console.error(error)
+      alert("Error updating profile!")
+    } else {
+      alert("Profile updated successfully!")
+    }
+
+    setIsLoading(false)
   }
 
   return (
@@ -72,7 +115,7 @@ export default function AccountForm({ user }) {
 
       {/* --- MAIN FORM --- */}
       <main className="border border-gray-200 rounded-xl p-6 bg-white shadow-sm">
-        <form className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-6">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-2 gap-y-6 gap-x-6">
           
           {/* FIRST NAME */}
           <div className="space-y-2">
