@@ -1,36 +1,33 @@
 "use client"
 
-import AccountForm from "@/app/_components/AccountForm"
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase/client";
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { supabase } from "@/lib/supabase/client" // Your singleton import
+import AccountForm from "@/app/_components/AccountForm" // Adjust path as needed
 
-function MyAccount() {
-
+export default function AccountPage() {
   const router = useRouter()
-  
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
 
   useEffect(() => {
     async function getUserData() {
-      // Get User from Browser Session
+      // 1. Get User Session
       const { data: { user }, error } = await supabase.auth.getUser()
 
       if (error || !user) {
-        console.log("No user found, redirecting...")
-        router.push("/auth/login") // Use router.push for client redirects
+        router.push("/auth/login")
         return
       }
 
-      // Get Profile Data
+      // 2. Get Profile Data
       const { data: profile } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
         .single()
 
-      // Combine Data
+      // 3. Format Data
       const userData = {
         id: user.id,
         email: user.email,
@@ -47,17 +44,29 @@ function MyAccount() {
     }
 
     getUserData()
-  }, [router, supabase])
+  }, [router])
 
   if (loading) {
-    return <div className="p-6">Loading account details...</div>
+    return (
+      <div className="max-w-3xl mx-auto p-6 space-y-6">
+        <div className="h-8 w-48 bg-gray-200 animate-pulse rounded"></div>
+        <div className="h-96 w-full bg-gray-100 animate-pulse rounded-xl"></div>
+      </div>
+    )
   }
 
   return (
-    <div>
-      <AccountForm user={user}/>
+    // CENTERED LAYOUT - No Sidebar
+    <div className="max-w-3xl mx-auto py-10 px-6">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Account Settings</h1>
+        <p className="text-gray-500 mt-2">
+          Manage your profile information and how you appear on EstateHub.
+        </p>
+      </div>
+      
+      {/* The Form Component */}
+      <AccountForm user={user} />
     </div>
   )
 }
-
-export default MyAccount
