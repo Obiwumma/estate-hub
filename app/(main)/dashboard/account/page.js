@@ -56,7 +56,6 @@ export default function AccountPage() {
   }
 
   return (
-    // CENTERED LAYOUT - No Sidebar
     <div className="max-w-3xl mx-auto py-10 px-6">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight text-gray-900">Account Settings</h1>
