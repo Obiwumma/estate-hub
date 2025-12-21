@@ -10,8 +10,11 @@ export default function ActiveLink({ href, children }) {
   return (
     <Link 
       href={href} 
-      className={isActive ? "bg-purple-600 font-bold flex w-full p-4 rounded-[200px]" : "text-gray-900" }
-    >
+      className={`block w-full p-4 transition-colors ${
+        isActive 
+          ? "bg-purple-600 text-white rounded-r-[50px] font-semibold" 
+          : "text-gray-900 hover:bg-gray-50"
+      }`}    >
       {children}
     </Link>
   );

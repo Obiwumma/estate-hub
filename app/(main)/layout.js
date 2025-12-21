@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }) {
               <div className="h-[80%] flex flex-col justify-between mt-20 ">
                 <div>
                   <ul className="grid gap-10">
-                    <li className="bg-purple-700"><ActiveLink href="/dashboard" >Dashboard </ActiveLink></li>
+                    <li><ActiveLink href="/dashboard" >Dashboard </ActiveLink></li>
                     <li><ActiveLink href="/properties" >Properties </ActiveLink></li>
                     <li><ActiveLink href="/dashboard/account" >My Account </ActiveLink></li>
                     <li><ActiveLink href="/dashboard/help" >Help & Support </ActiveLink></li>
