@@ -39,28 +39,28 @@ export default function HelpPage() {
              
              {/* Email */}
              <SocialLink 
-               href="mailto:your-email@gmail.com" 
+               href="mailto:pobiwumma@gmail.com" 
                icon={<FaEnvelope size={24} />} 
                label="Email" 
              />
 
              {/* GitHub */}
              <SocialLink 
-               href="https://github.com/your-username" 
+               href="https://github.com/Obiwumma" 
                icon={<FaGithub size={24} />} 
                label="GitHub" 
              />
 
              {/* Twitter / X */}
              <SocialLink 
-               href="https://twitter.com/your-username" 
+               href="https://x.com/Pascal_FTM" 
                icon={<FaTwitter size={24} />} 
                label="Twitter" 
              />
 
              {/* LinkedIn */}
              <SocialLink 
-               href="https://linkedin.com/in/your-username" 
+               href="https://www.linkedin.com/in/pascal-obiwumma" 
                icon={<FaLinkedin size={24} />} 
                label="LinkedIn" 
              />
