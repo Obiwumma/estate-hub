@@ -5,6 +5,15 @@
 @tailwind utilities;
 
 
+@layer base {
+  :root {
+    /* Set a base radius value (e.g., 0.5rem = 8px) */
+    --radius: 0.5rem; 
+    
+    /* ... other variables ... */
+  }
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

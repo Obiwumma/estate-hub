@@ -10,7 +10,7 @@ export default function ActiveLink({ href, children }) {
   return (
     <Link 
       href={href} 
-      className={isActive ? "text-purple-600 font-bold" : "text-gray-900"}
+      className={isActive ? "bg-purple-600 font-bold flex w-full p-4 rounded-[200px]" : "text-gray-900" }
     >
       {children}
     </Link>
