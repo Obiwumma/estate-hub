@@ -5,19 +5,21 @@ import { supabase } from "@/lib/supabase/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { PhoneInput } from "@/components/ui/phone" // Ensure you have this installed
+import { PhoneInput } from "@/components/ui/phone"
 import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" // Optional Shadcn Avatar
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" 
 
 export default function AccountForm({ user }) {
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
   
-  // State
   const [previewImage, setPreviewImage] = useState(user?.avatar_url)
   const [phone, setPhone] = useState(user?.phone_number || "")
 
-  // Helpers
+  const displayName = user?.first_name || user?.last_name 
+    ? `${user?.first_name || ""} ${user?.last_name || ""}`.trim()
+    : "Profile Picture";
+
   const getInitials = (first, last) => {
     return `${first?.charAt(0) || ""}${last?.charAt(0) || ""}`.toUpperCase() || "U"
   }
@@ -83,7 +85,7 @@ export default function AccountForm({ user }) {
 
             {/* Text & Button */}
             <div className="space-y-2 flex-1">
-              <h3 className="font-medium text-lg">Profile Picture</h3>
+              <h3 className="font-medium text-lg">{displayName}</h3>
               <p className="text-sm text-gray-500">
                 Upload a professional photo. Recommended size: 500x500px.
               </p>
