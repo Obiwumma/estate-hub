@@ -1,7 +1,7 @@
 
 // import "./globals.css";
 import LogoutButton from "../_components/LogoutButton";
-import AuthGuard from "../_components/AuthGuard";
+import Link from "next/link";
 
 export const metadata = {
   title: "Create Next App",
@@ -20,10 +20,10 @@ export default function DashboardLayout({ children }) {
               <div className="h-[80%] flex flex-col justify-between mt-20 ">
                 <div>
                   <ul className="grid gap-10">
-                    <li>Dashboard</li>
-                    <li>Properties</li>
-                    <li>My Account</li>
-                    <li>Help & Support</li>
+                    <li><Link href="/dashboard" >Dashboard </Link></li>
+                    <li><Link href="/properties" >Properties </Link></li>
+                    <li><Link href="/dashboard/account" >My Account </Link></li>
+                    <li><Link href="/dashboard/help" >Help & Support </Link></li>
                   </ul>
                 </div>
                 <div>
