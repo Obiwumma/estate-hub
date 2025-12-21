@@ -5,7 +5,7 @@ export default function LogoutButton() {
 
   async function handleLogout() {
     await supabase.auth.signOut({ scope: "local" }); 
-    window.location.href = "/login"; // redirect after logout
+    window.location.href = "/auth/login"; // redirect after logout
   }
 
   return (
