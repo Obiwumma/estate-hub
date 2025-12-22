@@ -3,6 +3,7 @@
 import LogoutButton from "../_components/LogoutButton";
 import ActiveLink from "../_components/ActiveLink";
 import AuthGuard from "../_components/AuthGuard";
+import Image from "next/image";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,10 +18,13 @@ export default function DashboardLayout({ children }) {
 
             {/* SIDEBAR */}
             <nav className=" border-r text-gray-900 h-screen w-64 fixed left-0 top-0 p-6">
-              <h1 className="text-2xl font-bold mb-4">Logo EstateHub</h1>
-              <div className="h-[80%] flex flex-col justify-between mt-20 ">
+              <Image src="/EstateHub_Logo2.png"
+              width={200}
+              height={10}
+              alt="EstateHub_logo"></Image>
+              <div className="h-[75%] flex flex-col justify-between mt-5 ">
                 <div>
-                  <ul className="grid gap-10">
+                  <ul className="grid gap-5">
                     <li><ActiveLink href="/dashboard" >Dashboard </ActiveLink></li>
                     <li><ActiveLink href="/properties" >Properties </ActiveLink></li>
                     <li><ActiveLink href="/dashboard/account" >My Account </ActiveLink></li>
