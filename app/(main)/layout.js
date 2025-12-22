@@ -1,8 +1,11 @@
 
 // import "./globals.css";
 import LogoutButton from "../_components/LogoutButton";
+import Link from "next/link";
 import ActiveLink from "../_components/ActiveLink";
 import AuthGuard from "../_components/AuthGuard";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoSettingsOutline } from "react-icons/io5";
 import Image from "next/image";
 
 export const metadata = {
@@ -41,10 +44,10 @@ export default function DashboardLayout({ children }) {
             <div className="ml-64 w-full">
               {/* TOP NAV */}
               <nav className="flex p-6 justify-between shadow">
-                <div className="font-semibold">search</div>
+                <div className="font-semibold"></div>
                 <div className="flex items-center gap-4">
-                  <span>Notification</span>
-                  <span>Agent Name</span>
+                  <span><IoMdNotificationsOutline size={25}/></span>
+                  <span><Link href={"/dashboard/account"}><IoSettingsOutline size={25}/></Link></span>
                 </div>
               </nav>
 
