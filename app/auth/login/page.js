@@ -89,13 +89,13 @@ function LoginPage() {
 
             </div>
 
-          </form>   
-          <div className="flex items-center justify-center">
-            <p>or</p>
-          </div>
+            <div className="flex items-center justify-center">
+              <p>or</p>
+            </div>
 
+          </form>   
           
-            <LoginButton/>
+          <LoginButton/>
           
 
         </div>
