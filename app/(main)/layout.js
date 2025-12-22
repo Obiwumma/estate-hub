@@ -2,6 +2,7 @@
 // import "./globals.css";
 import LogoutButton from "../_components/LogoutButton";
 import ActiveLink from "../_components/ActiveLink";
+import AuthGuard from "../_components/AuthGuard";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,7 +12,7 @@ export const metadata = {
 export default function DashboardLayout({ children }) {
   return (
       
-        <>
+        <AuthGuard>
           <div className="flex">
 
             {/* SIDEBAR */}
@@ -50,7 +51,7 @@ export default function DashboardLayout({ children }) {
             </div>
           </div>
 
-        </>
+        </AuthGuard>
     
   );
 }
