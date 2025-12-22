@@ -13,7 +13,7 @@ export default function ActiveLink({ href, children }) {
       className={`block w-full p-4 transition-colors ${
         isActive 
           ? "bg-purple-600 text-white rounded-r-[50px] font-semibold" 
-          : "text-gray-900 hover:bg-gray-50"
+          : "text-gray-900 hover:bg-purple-100 rounded-r-[50px]"
       }`}    >
       {children}
     </Link>

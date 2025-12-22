@@ -183,7 +183,7 @@ export default function DashboardPage() {
               {/* Footer Link */}
               {recentProperties.length > 0 && (
                 <div className="p-4 border-t bg-gray-50 rounded-b-xl text-center">
-                  <Link href="/properties" className="text-sm text-purple-600 font-medium hover:underline">
+                  <Link href="/dashboard/my-properties" className="text-sm text-purple-600 font-medium hover:underline">
                     View all properties &rarr;
                   </Link>
                 </div>
@@ -205,7 +205,7 @@ export default function DashboardPage() {
                   <p className="text-sm text-purple-700 mt-1">
                     Complete your profile to gain trust from potential clients.
                   </p>
-                  <Link href="/account">
+                  <Link href="/dashboard/account">
                     <Button variant="link" className="p-0 h-auto mt-2 text-purple-800 font-bold">
                       Go to Settings &rarr;
                     </Button>
@@ -220,7 +220,7 @@ export default function DashboardPage() {
                <p className="text-sm text-gray-500 mb-4">
                  Having trouble uploading? Check our guide or contact support.
                </p>
-               <Link href="/help">
+               <Link href="/dashboard/help">
                  <Button variant="outline" className="w-full">Contact Support</Button>
                </Link>
             </Card>

@@ -86,7 +86,7 @@ function PropertiesList() {
     <div className='text-gray-800'>
       <header className='flex justify-between'>
         <span className='text-2xl font-bold'>Properties</span>
-        <Button className="bg-purple-600 text-white rounded px-5 py-5 " ><Link href="/properties/new"> + Add Property</Link></Button>
+        <Button className="bg-purple-600 text-white hover:bg-purple-700 rounded px-5 py-5 " ><Link href="/properties/new"> + Add Property</Link></Button>
       </header>
 
       <nav className='bg-white p-6 rounded-xl mt-5 mb-10 shadow-sm border border-gray-100'>
