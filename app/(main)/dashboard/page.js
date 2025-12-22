@@ -171,7 +171,7 @@ export default function DashboardPage() {
                             {property.status || 'Draft'}
                          </Badge>
                          <Button size="icon" variant="ghost" className="h-8 w-8 text-gray-400 hover:text-purple-600">
-                           <FaEdit />
+                           <Link href={`/properties/${property.id}/edit`}><FaEdit /></Link>
                          </Button>
                       </div>
                     </div>
