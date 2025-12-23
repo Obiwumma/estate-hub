@@ -71,7 +71,7 @@ export default function DashboardPage() {
 
   return (
     <AuthGuard>
-      <div className="p-6 max-w-7xl mx-auto space-y-8">
+      <div className=" p-4 md:p-6 max-w-7xl mx-auto space-y-8">
         
         {/* --- 1. HEADER & QUICK ACTION --- */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -117,7 +117,7 @@ export default function DashboardPage() {
         </div>
 
         {/* --- 3. MAIN DASHBOARD CONTENT (Split Layout) --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           
           {/* LEFT SIDE: RECENT INVENTORY (Takes up 2 cols) */}
           <div className="lg:col-span-2 space-y-4">
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                 {loading ? (
                   <div className="p-6 text-center text-gray-500">Loading properties...</div>
                 ) : recentProperties.length === 0 ? (
-                  <div className="p-12 text-center flex flex-col items-center gap-3">
+                  <div className="p-6 md:p-12 text-center flex flex-col items-center gap-3">
                     <div className="p-4 bg-gray-100 rounded-full text-gray-400">
                       <FaHome size={24} />
                     </div>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
                     const mainImage = images[0] || '/placeholder.jpg';
 
                     return (
-                      <div key={property.id} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                      <div key={property.id} className="p-4 flex items-center justify-between gap-2 hover:bg-gray-50 transition-colors">
                       <div className="flex items-center gap-4">
                         {/* Thumbnail Image */}
                         <div className="h-12 w-12 bg-gray-200 rounded-md overflow-hidden relative shrink-0">
