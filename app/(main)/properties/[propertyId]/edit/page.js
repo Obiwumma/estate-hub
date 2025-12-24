@@ -16,12 +16,12 @@ async function EditForm({params}) {
   }
 
   return (
-   <div className="w-full flex justify-center py-10">
-    <div className="w-[60vw] bg-white shadow-sm rounded-xl p-10">
+   <div className="w-full flex justify-center py-6 px-4 md:py-10">
+    <div className="w-full md:w-[80vw] lg:w-[60vw] bg-white shadow-sm rounded-xl p-5 md:p-10">
     
     {/* HEADER */}
     <div className="mb-8">
-      <h1 className="text-2xl font-bold">Register your property</h1>
+      <h1 className="text-xl md:text-2xl font-bold">Register your property</h1>
     </div>
 
     {/* FORM */}
