@@ -32,9 +32,9 @@ export default function PropertyDetail() {
   const images = property.image_url ? JSON.parse(property.image_url) : [];
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-4 md:p-6">
       {/* 1. Image Section */}
-      <div className="h-96 relative w-full rounded-2xl overflow-hidden mb-8">
+      <div className="h-64 md:h-96 mb-6 md:mb-8 relative w-full rounded-2xl overflow-hidden">
         <Image 
           src={images[0] || '/placeholder.jpg'} 
           alt={property.title} 
@@ -43,7 +43,7 @@ export default function PropertyDetail() {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
         {/* 2. Main Details */}
         <div className="col-span-2">
           <h1 className="text-3xl font-bold mb-2">{property.title}</h1>
