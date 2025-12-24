@@ -73,16 +73,16 @@ export default function MyPropertiesPage() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="max-w-6xl mx-auto p-4 md:p-6">
       {/* Header Section */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-6 md:mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">My Listings</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-gray-900">My Listings</h1>
           <p className="text-sm text-gray-500">Manage your active and sold properties.</p>
         </div>
         <Link 
           href="/properties/new" 
-          className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded font-medium transition-colors flex items-center gap-2"
+          className="bg-purple-600 w-full md:w-auto justify-centerhover:bg-purple-700 text-white px-4 py-2 rounded font-medium transition-colors flex items-center gap-2"
         >
           <span>+</span> Create New Listing
         </Link>
