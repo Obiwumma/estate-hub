@@ -12,8 +12,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export default function AccountForm({ user }) {
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
-  
-  // 1. ADD ERROR STATE
   const [errors, setErrors] = useState({}) 
 
   const [previewImage, setPreviewImage] = useState(user?.avatar_url)
@@ -29,11 +27,9 @@ export default function AccountForm({ user }) {
 
   const handleImageClick = () => fileInputRef.current.click()
 
-  // 2. ADD FILE VALIDATION (Size & Type)
   const handleFileChange = (event) => {
     const file = event.target.files[0]
     if (file) {
-      // Check file size (e.g., 2MB limit)
       if (file.size > 2 * 1024 * 1024) {
         alert("File size must be less than 2MB");
         return;
@@ -44,19 +40,15 @@ export default function AccountForm({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // 3. CLEAR PREVIOUS ERRORS
     setErrors({})
     setIsLoading(true)
 
     const formData = new FormData(e.target)
     
-    // Extract values for validation
     const firstName = formData.get("firstName");
     const lastName = formData.get("lastName");
     const dob = formData.get("dob");
 
-    // 4. DEFINE VALIDATION RULES
     const newErrors = {};
     let hasError = false;
 
@@ -79,7 +71,6 @@ export default function AccountForm({ user }) {
         newErrors.dob = "Date of Birth is required.";
         hasError = true;
     } else {
-        // Optional: Check if user is at least 18
         const birthDate = new Date(dob);
         const ageDifMs = Date.now() - birthDate.getTime();
         const ageDate = new Date(ageDifMs); 
@@ -89,20 +80,17 @@ export default function AccountForm({ user }) {
         }
     }
 
-    // 5. STOP IF ERRORS EXIST
     if (hasError) {
         setErrors(newErrors);
         setIsLoading(false);
-        return; // Stop execution here
+        return; 
     }
-
-    // --- PROCEED IF VALID ---
 
     const updates = {
       id: user.id,
       first_name: firstName,
       last_name: lastName,
-      company_name: formData.get("companyName"), // Optional, so no validation needed
+      company_name: formData.get("companyName"), 
       date_of_birth: dob,
       phone_number: phone,
       updated_at: new Date(),
@@ -120,16 +108,19 @@ export default function AccountForm({ user }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
       
       {/* SECTION 1: IDENTITY & PHOTO */}
       <Card>
-        <CardContent className="p-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        {/* RESPONSIVE: Reduced padding on mobile (p-4) */}
+        <CardContent className="p-4 md:p-6">
+          
+          {/* RESPONSIVE: Centered on mobile, Left-aligned on Desktop */}
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6">
             
-            {/* Avatar Section */}
-            <div className="relative group">
-              <Avatar className="w-24 h-24 border-2 border-gray-100">
+            {/* Avatar */}
+            <div className="relative group shrink-0">
+              <Avatar className="w-20 h-20 md:w-24 md:h-24 border-2 border-gray-100">
                 <AvatarImage src={previewImage} className="object-cover" />
                 <AvatarFallback className="bg-purple-100 text-purple-700 text-xl font-bold">
                   {getInitials(user?.first_name, user?.last_name)}
@@ -144,10 +135,10 @@ export default function AccountForm({ user }) {
               />
             </div>
 
-            {/* Text & Button */}
-            <div className="space-y-2 flex-1">
+            {/* Text & Button - Centered text on mobile */}
+            <div className="space-y-2 flex-1 text-center sm:text-left">
               <h3 className="font-medium text-lg">{displayName}</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 max-w-xs mx-auto sm:mx-0">
                 Upload a professional photo. Recommended size: 500x500px.
               </p>
               <Button 
@@ -162,10 +153,10 @@ export default function AccountForm({ user }) {
             </div>
           </div>
 
-          <div className="h-px bg-gray-100 my-8" />
+          <div className="h-px bg-gray-100 my-6 md:my-8" />
 
-          {/* Name Fields Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Name Fields Grid - Responsive Gap */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="space-y-2">
               <Label className={errors.firstName ? "text-red-500" : ""}>First Name</Label>
               <Input 
@@ -174,7 +165,6 @@ export default function AccountForm({ user }) {
                 placeholder="e.g. Cristiano"
                 className={errors.firstName ? "border-red-500" : ""} 
               />
-              {/* 6. DISPLAY ERROR MESSAGE */}
               {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
             </div>
 
@@ -194,9 +184,9 @@ export default function AccountForm({ user }) {
 
       {/* SECTION 2: PROFESSIONAL DETAILS */}
       <Card>
-        <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CardContent className="p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="font-medium text-lg mb-4">Professional Details</h3>
+            <h3 className="font-medium text-lg mb-2 md:mb-4">Professional Details</h3>
           </div>
 
           <div className="space-y-2">
@@ -219,9 +209,9 @@ export default function AccountForm({ user }) {
 
       {/* SECTION 3: CONTACT INFO */}
       <Card>
-        <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CardContent className="p-4 md:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <div className="col-span-1 md:col-span-2">
-            <h3 className="font-medium text-lg mb-4">Contact Information</h3>
+            <h3 className="font-medium text-lg mb-2 md:mb-4">Contact Information</h3>
           </div>
 
           <div className="space-y-2">
@@ -243,13 +233,13 @@ export default function AccountForm({ user }) {
         </CardContent>
       </Card>
 
-      {/* SUBMIT BUTTON AREA */}
-      <div className="flex justify-end pt-4 pb-10">
+      {/* SUBMIT BUTTON - Full width on mobile, right aligned on desktop */}
+      <div className="flex flex-col md:flex-row justify-end pt-4 pb-10">
         <Button 
           type="submit" 
           size="lg" 
           disabled={isLoading}
-          className="bg-purple-600 hover:bg-purple-700 text-white min-w-[150px]"
+          className="bg-purple-600 hover:bg-purple-700 text-white w-full md:w-auto min-w-[150px]"
         >
           {isLoading ? "Saving..." : "Save Changes"}
         </Button>
