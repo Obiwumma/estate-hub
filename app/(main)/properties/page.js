@@ -84,12 +84,12 @@ function PropertiesList() {
 
   return (
     <div className='text-gray-800'>
-      <header className='flex justify-between'>
+      <header className='flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0'>
         <span className='text-2xl font-bold'>Properties</span>
         <Button className="bg-purple-600 text-white hover:bg-purple-700 rounded px-5 py-5 " ><Link href="/properties/new"> + Add Property</Link></Button>
       </header>
 
-      <nav className='bg-white p-6 rounded-xl mt-5 mb-10 shadow-sm border border-gray-100'>
+      <nav className='bg-white p-4 md:p-6 mb-6 md:mb-10 rounded-xl mt-5  shadow-sm border border-gray-100'>
   
         {/* Container: Stacks on phone, Row on Desktop */}
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between"> 
@@ -126,14 +126,14 @@ function PropertiesList() {
       </nav>
 
       <main>
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10'>
           {properties.map((p) => {
             // Safety check for images
             const images = p.image_url ? JSON.parse(p.image_url) : [];
             const mainImage = images[0] || '/placeholder.jpg';
 
             return (
-              <Card className="min-w-52 hover:shadow-lg transition-shadow" key={p.id}>
+              <Card className=" hover:shadow-lg transition-shadow" key={p.id}>
                 <CardHeader className="p-0">
                   <div className="relative h-48 w-full">
                      <Image 
