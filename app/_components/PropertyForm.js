@@ -114,12 +114,12 @@ function PropertyForm({ mode = "create", property }) {
       {/* 2. PRICE & STATUS (Grid Layout) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <Label className={errors.price ? "text-red-500" : ""}>Price (₦)</Label>
+          <Label className={errors.price ? "text-red-500" : ""}>Price ($)</Label>
           <Input
             type="number"
             name="price"
             defaultValue={property?.price || ""}
-            placeholder="e.g. 5000000"
+            placeholder="e.g. 2000"
             className={errors.price ? "border-red-500" : "border-gray-300"}
           />
           {errors.price && <p className="text-xs text-red-500">{errors.price}</p>}

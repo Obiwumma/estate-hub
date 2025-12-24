@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image"
+import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
 import LoginButton from "../../_components/LoginButton"
@@ -113,6 +114,15 @@ function LoginPage() {
           </form>   
           
           <LoginButton/>
+
+          <div className="text-center mt-4">
+              <p className="text-sm text-gray-500">
+                Don&apos;t have an account?{" "}
+                <Link href="/auth/signup" className="font-bold text-purple-600 hover:text-purple-500 hover:underline">
+                  Sign up
+                </Link>
+              </p>
+            </div>
 
         </div>
        

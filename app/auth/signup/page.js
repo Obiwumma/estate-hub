@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image"
+import Link from "next/link";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -174,6 +175,15 @@ function SignupPage() {
           </div>
 
           <LoginButton />
+
+          <div className="text-center mt-4">
+              <p className="text-sm text-gray-500">
+                Already have an account?{" "}
+                <Link href="/auth/login" className="font-bold text-purple-600 hover:text-purple-500 hover:underline">
+                  Login
+                </Link>
+              </p>
+            </div>
         </div>
       </div>
     </div>
