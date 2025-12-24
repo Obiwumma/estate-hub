@@ -13,6 +13,9 @@ export default function AccountForm({ user }) {
   const fileInputRef = useRef(null)
   const [isLoading, setIsLoading] = useState(false)
   
+  // 1. ADD ERROR STATE
+  const [errors, setErrors] = useState({}) 
+
   const [previewImage, setPreviewImage] = useState(user?.avatar_url)
   const [phone, setPhone] = useState(user?.phone_number || "")
 
@@ -26,23 +29,81 @@ export default function AccountForm({ user }) {
 
   const handleImageClick = () => fileInputRef.current.click()
 
+  // 2. ADD FILE VALIDATION (Size & Type)
   const handleFileChange = (event) => {
     const file = event.target.files[0]
-    if (file) setPreviewImage(URL.createObjectURL(file))
+    if (file) {
+      // Check file size (e.g., 2MB limit)
+      if (file.size > 2 * 1024 * 1024) {
+        alert("File size must be less than 2MB");
+        return;
+      }
+      setPreviewImage(URL.createObjectURL(file))
+    }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // 3. CLEAR PREVIOUS ERRORS
+    setErrors({})
     setIsLoading(true)
 
     const formData = new FormData(e.target)
     
+    // Extract values for validation
+    const firstName = formData.get("firstName");
+    const lastName = formData.get("lastName");
+    const dob = formData.get("dob");
+
+    // 4. DEFINE VALIDATION RULES
+    const newErrors = {};
+    let hasError = false;
+
+    if (!firstName || firstName.length < 2) {
+      newErrors.firstName = "First name must be at least 2 characters.";
+      hasError = true;
+    }
+
+    if (!lastName || lastName.length < 2) {
+      newErrors.lastName = "Last name must be at least 2 characters.";
+      hasError = true;
+    }
+
+    if (!phone || phone.length < 10) {
+        newErrors.phone = "Please enter a valid phone number.";
+        hasError = true;
+    }
+    
+    if (!dob) {
+        newErrors.dob = "Date of Birth is required.";
+        hasError = true;
+    } else {
+        // Optional: Check if user is at least 18
+        const birthDate = new Date(dob);
+        const ageDifMs = Date.now() - birthDate.getTime();
+        const ageDate = new Date(ageDifMs); 
+        if (Math.abs(ageDate.getUTCFullYear() - 1970) < 18) {
+            newErrors.dob = "You must be at least 18 years old.";
+            hasError = true;
+        }
+    }
+
+    // 5. STOP IF ERRORS EXIST
+    if (hasError) {
+        setErrors(newErrors);
+        setIsLoading(false);
+        return; // Stop execution here
+    }
+
+    // --- PROCEED IF VALID ---
+
     const updates = {
       id: user.id,
-      first_name: formData.get("firstName"),
-      last_name: formData.get("lastName"),
-      company_name: formData.get("companyName"),
-      date_of_birth: formData.get("dob"),
+      first_name: firstName,
+      last_name: lastName,
+      company_name: formData.get("companyName"), // Optional, so no validation needed
+      date_of_birth: dob,
       phone_number: phone,
       updated_at: new Date(),
     }
@@ -50,7 +111,7 @@ export default function AccountForm({ user }) {
     const { error } = await supabase.from('profiles').upsert(updates)
 
     if (error) {
-      alert("Error saving profile.") // Replace with toast if available
+      alert("Error saving profile.") 
     } else {
       alert("Profile updated successfully!")
     }
@@ -101,18 +162,31 @@ export default function AccountForm({ user }) {
             </div>
           </div>
 
-          {/* Divider */}
           <div className="h-px bg-gray-100 my-8" />
 
           {/* Name Fields Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label>First Name</Label>
-              <Input name="firstName" defaultValue={user?.first_name} placeholder="e.g. Cristiano" />
+              <Label className={errors.firstName ? "text-red-500" : ""}>First Name</Label>
+              <Input 
+                name="firstName" 
+                defaultValue={user?.first_name} 
+                placeholder="e.g. Cristiano"
+                className={errors.firstName ? "border-red-500" : ""} 
+              />
+              {/* 6. DISPLAY ERROR MESSAGE */}
+              {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
             </div>
+
             <div className="space-y-2">
-              <Label>Last Name</Label>
-              <Input name="lastName" defaultValue={user?.last_name} placeholder="e.g. Ronaldo" />
+              <Label className={errors.lastName ? "text-red-500" : ""}>Last Name</Label>
+              <Input 
+                name="lastName" 
+                defaultValue={user?.last_name} 
+                placeholder="e.g. Ronaldo" 
+                className={errors.lastName ? "border-red-500" : ""}
+              />
+              {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
             </div>
           </div>
         </CardContent>
@@ -131,8 +205,14 @@ export default function AccountForm({ user }) {
           </div>
 
            <div className="space-y-2">
-            <Label>Date of Birth</Label>
-            <Input type="date" name="dob" defaultValue={user?.date_of_birth} />
+            <Label className={errors.dob ? "text-red-500" : ""}>Date of Birth</Label>
+            <Input 
+                type="date" 
+                name="dob" 
+                defaultValue={user?.date_of_birth} 
+                className={errors.dob ? "border-red-500" : ""}
+            />
+            {errors.dob && <p className="text-xs text-red-500">{errors.dob}</p>}
           </div>
         </CardContent>
       </Card>
@@ -151,13 +231,14 @@ export default function AccountForm({ user }) {
           </div>
 
           <div className="space-y-2">
-            <Label>Phone Number</Label>
+            <Label className={errors.phone ? "text-red-500" : ""}>Phone Number</Label>
             <PhoneInput 
               value={phone} 
               onChange={setPhone} 
               defaultCountry="NG" 
-              className="w-full"
+              className={`w-full ${errors.phone ? "border-red-500 rounded-md" : ""}`}
             />
+            {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
           </div>
         </CardContent>
       </Card>
