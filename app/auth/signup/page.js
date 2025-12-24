@@ -32,12 +32,14 @@ function SignupPage() {
     <div className="flex flex-col  justify-enter h-screen gap-4">
 
       <header>
-        <h1 className="text-xl p-5 font-semibold text-purple-600">EstateHub</h1>
+        <div className="md:hidden">
+          <Image src="/EstateHub_Logo2.png" width={100} height={50} alt="Logo" className="w-auto h-16 my-4" />
+        </div>
       </header>
-      <div className="grid grid-cols-2 gap-14 items-center justify-center px-40 py-5">
-        <div className="flex flex-col items-center text-center gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center justify-center px-6 md:px-20 lg:px-40 py-10 md:py-5">
+        <div className="hidden md:flex flex-col items-center text-center gap-2">
           <Image alt='property image' src={"/ahouse.jpg"} width={350} height={400} className="rounded-t-full border-t-4 border-purple-500 p-4 " ></Image>
-          <h1 className="font-semibold text-2xl text-purple-950">Discover Your Dream Property and Navigate the Market</h1>
+          <h1 className="font-semibold text-xl md:text-2xl text-purple-950">Discover Your Dream Property and Navigate the Market</h1>
           <p className="text-gray-500 text-sm">Transform your real estate search with our smart dashboard - find the perfect property and stay ahead of trends</p>
         </div>
 
@@ -105,7 +107,7 @@ function SignupPage() {
             </div>
 
             <div className="flex pt-4">
-              <button type="submit" className="bg-purple-600 text-white px-6 py-5 hover:bg-purple-700 rounded w-full">
+              <button type="submit" className="bg-purple-600 text-white px-4 py-4 hover:bg-purple-700 rounded w-full">
                 Sign Up
               </button>
             </div>
