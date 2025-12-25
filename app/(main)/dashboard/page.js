@@ -134,7 +134,7 @@ export default function DashboardPage() {
                     </div>
                     <p className="text-gray-900 font-medium">No properties yet</p>
                     <p className="text-gray-500 text-sm">Upload your first listing to see it here.</p>
-                    <Link href="/properties/add">
+                    <Link href="/properties/new">
                       <Button variant="outline" className="mt-2">Create Listing</Button>
                     </Link>
                   </div>

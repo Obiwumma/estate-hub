@@ -103,7 +103,7 @@ export default function DashboardLayout({ children }) {
 
               {/* Mobile Logo */}
               <div className="md:hidden">
-                 <Image src="/EstateHub_Logo2.png" width={100} height={30} alt="Logo" className="w-auto h-10" />
+                 <Image src="/EstateHub_Logo2.png" width={100} height={30} alt="Logo" priority className="w-auto h-10" />
               </div>
             </div>
 

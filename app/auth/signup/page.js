@@ -73,7 +73,7 @@ function SignupPage() {
 
       <header>
         <div className="md:hidden">
-          <Image src="/EstateHub_Logo2.png" width={100} height={50} alt="Logo" className="w-auto h-16 my-4" />
+          <Image src="/EstateHub_Logo2.png" width={100} height={50} alt="Logo" priority className="w-auto h-16 my-4" />
         </div>
       </header>
 
