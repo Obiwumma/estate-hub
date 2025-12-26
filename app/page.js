@@ -15,9 +15,9 @@ export default function LandingPage() {
            <Image 
              src="/EstateHub_Logo2.png" 
              width={120} 
-             height={40} 
+             height={60} 
              alt="EstateHub Logo" 
-             className="w-auto h-8 md:h-10"
+             className="w-auto h-10 md:h-14"
            />
         </div>
 
@@ -42,7 +42,7 @@ export default function LandingPage() {
         
         {/* Badge */}
         <div className="bg-purple-50 text-purple-700 text-xs md:text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-purple-100">
-          🚀 The #1 Real Estate Platform in Nigeria
+          The #1 Real Estate Platform 
         </div>
 
         {/* Headline */}
@@ -59,16 +59,16 @@ export default function LandingPage() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-          <Link href="/auth/signup">
+          <Link href="/properties">
              <Button className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white h-12 px-8 text-lg rounded-lg shadow-lg hover:shadow-purple-200 transition-all">
                Start Searching
              </Button>
           </Link>
-          <Link href="/auth/login">
+          {/* <Link href="/auth/login">
              <Button variant="outline" className="w-full sm:w-auto border-gray-300 text-gray-700 hover:bg-gray-50 h-12 px-8 text-lg rounded-lg">
                I am an Agent
              </Button>
-          </Link>
+          </Link> */}
         </div>
 
         {/* Hero Image / Dashboard Preview */}
@@ -95,7 +95,6 @@ export default function LandingPage() {
         <div className="flex justify-center gap-6 mt-4">
           <Link href="#" className="hover:text-purple-600">Privacy Policy</Link>
           <Link href="#" className="hover:text-purple-600">Terms of Service</Link>
-          <Link href="#" className="hover:text-purple-600">Twitter</Link>
         </div>
       </footer>
 
