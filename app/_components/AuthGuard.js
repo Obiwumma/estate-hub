@@ -5,22 +5,24 @@ import { useRouter, usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 
 export default function AuthGuard({ children }) {
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
 
-  // Define public paths
+  // 1. Define Public Paths
   const publicPaths = ["/login", "/signup", "/auth/login", "/auth/signup", "/"];
   const isProtected = !publicPaths.includes(pathname);
 
+  // 2. THE FIX: Initialize 'loading' based on whether the page IS protected.
+  // If it's a public page, loading starts as 'false'. No state update needed!
+  const [loading, setLoading] = useState(isProtected);
+
   useEffect(() => {
-    // 1. If public, just ensure loading is false and stop
+    // If it's public, we don't need to do anything because loading is already false.
     if (!isProtected) {
-      setLoading(false);
       return;
     }
 
-    // 2. If protected, check Supabase
+    // Only check auth if the page is protected
     async function checkUser() {
       const { data } = await supabase.auth.getSession();
       if (!data.session) {
@@ -31,20 +33,12 @@ export default function AuthGuard({ children }) {
     }
 
     checkUser();
-  }, [isProtected, router]); // Hook is always called now
+  }, [isProtected, router]);
 
-  // 3. RENDER LOGIC (Happens AFTER hooks)
-  
-  // If public, show content immediately
-  if (!isProtected) {
-    return <>{children}</>;
-  }
-
-  // If protected and checking, show loader
+  // 3. Render Logic
   if (loading) {
     return <div className="p-8 flex justify-center">Loading...</div>;
   }
 
-  // If protected and logged in, show content
   return <>{children}</>;
 }
