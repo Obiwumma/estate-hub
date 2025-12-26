@@ -93,7 +93,7 @@ export default function MyPropertiesPage() {
         {properties.length === 0 ? (
           // Empty State
           <div className="text-center py-12">
-            <p className="text-gray-500 mb-4">You haven't posted any properties yet.</p>
+            <p className="text-gray-500 mb-4">You haven&apos;t posted any properties yet.</p>
             <Link href="/properties/new" className="text-purple-600 font-medium hover:underline">
               Create your first listing &rarr;
             </Link>

@@ -30,7 +30,7 @@ export default function HelpPage() {
               Contact the Developer
             </h2>
             <p className="text-gray-500 max-w-md mx-auto">
-              If you're running into bugs, need a feature, or just want to say hi, feel free to reach out directly.
+              If you&apos;re running into bugs, need a feature, or just want to say hi, feel free to reach out directly.
             </p>
           </div>
 
