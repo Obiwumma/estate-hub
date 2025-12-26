@@ -17,6 +17,26 @@ import {
   SheetDescription 
 } from "@/components/ui/sheet";
 
+const SidebarContent = ({ onClose }) => (
+  <div className="flex flex-col h-full">
+     <div className="mb-8">
+        <Image src="/EstateHub_Logo2.png" width={150} height={40} alt="Logo" className="w-auto h-auto" />
+     </div>
+     <div className="flex-1 flex flex-col justify-between">
+       <ul className="grid gap-4">
+         {/* Use onClose() when a link is clicked */}
+         <li onClick={onClose}><ActiveLink href="/dashboard">Dashboard</ActiveLink></li>
+         <li onClick={onClose}><ActiveLink href="/properties">Properties</ActiveLink></li>
+         <li onClick={onClose}><ActiveLink href="/dashboard/account">My Account</ActiveLink></li>
+         <li onClick={onClose}><ActiveLink href="/dashboard/help">Help & Support</ActiveLink></li>
+       </ul>
+       <div className="mb-4">
+         <LogoutButton />
+       </div>
+     </div>
+  </div>
+);
+
 export default function DashboardLayout({ children }) {
   
   // 2. Add State to control the menu manually
@@ -37,41 +57,13 @@ export default function DashboardLayout({ children }) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-
-  // Reusable Sidebar Content
-  const SidebarContent = () => (
-    <div className="flex flex-col h-full">
-       <div className="mb-8">
-          <Image 
-            src="/EstateHub_Logo2.png"
-            width={150}
-            height={40}
-            alt="EstateHub_logo"
-            className="w-auto h-auto"
-          />
-       </div>
-       <div className="flex-1 flex flex-col justify-between">
-         <ul className="grid gap-4">
-           {/* Note: Clicking a link should also close the menu on mobile */}
-           <li onClick={() => setIsMobileMenuOpen(false)}><ActiveLink href="/dashboard">Dashboard</ActiveLink></li>
-           <li onClick={() => setIsMobileMenuOpen(false)}><ActiveLink href="/properties">Properties</ActiveLink></li>
-           <li onClick={() => setIsMobileMenuOpen(false)}><ActiveLink href="/dashboard/account">My Account</ActiveLink></li>
-           <li onClick={() => setIsMobileMenuOpen(false)}><ActiveLink href="/dashboard/help">Help & Support</ActiveLink></li>
-         </ul>
-         <div className="mb-4">
-           <LogoutButton />
-         </div>
-       </div>
-    </div>
-  );
-
   return (
     <AuthGuard>
       <div className="flex min-h-screen bg-gray-50">
 
         {/* DESKTOP SIDEBAR */}
         <aside className="hidden md:flex border-r bg-white text-gray-900 w-64 fixed left-0 top-0 h-screen p-6 flex-col z-50">
-           <SidebarContent />
+           <SidebarContent onClose={() => {}} />
         </aside>
 
         {/* MAIN CONTENT */}

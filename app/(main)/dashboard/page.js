@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
+import Image from "next/image";
 import AuthGuard from "@/app/_components/AuthGuard";
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -151,7 +152,7 @@ export default function DashboardPage() {
                         <div className="h-12 w-12 bg-gray-200 rounded-md overflow-hidden relative shrink-0">
                            {/* Add an <img> tag here if you have image_url */}
                            {property.image_url ? (
-                             <img src={mainImage} alt="" className="h-full w-full object-cover" />
+                             <Image src={mainImage} alt="" fill className="object-cover" sizes="48px" />
                            ) : (
                              <div className="h-full w-full flex items-center justify-center text-gray-400"><FaHome /></div>
                            )}
