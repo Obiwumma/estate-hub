@@ -47,18 +47,16 @@ function PropertiesList() {
         .from("properties")
         .select("*")
 
-        if (filter == "sale") query.eq("status", "sale")
-          else if (filter == "rent") query.eq("status", "rent")
-            else query.in("status", ['sale', 'rent'])
+      // 1. FILTER LOGIC
+      if (filter == "sale") query.eq("status", "sale")
+      else if (filter == "rent") query.eq("status", "rent")
+      else query.in("status", ['sale', 'rent'])
 
-        if (search) query.ilike("title", `%${search}%`)
+      // 2. SEARCH LOGIC (The Fix)
+      // Change 'search' to 'finalInput' here 👇
+      if (finalInput) query.ilike("title", `%${finalInput}%`)
 
       const { data } = await query
-
-      // const { data } = await supabase
-      //   .from("properties")
-      //   .select("*")
-      //   .in('status', ['sale', 'rent']);
 
       setProperties(data || []);
       setLoading(false);
