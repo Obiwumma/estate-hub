@@ -63,7 +63,7 @@ function PropertiesList() {
     }
 
     load();
-  }, [filter, finalInput]);
+  }, [filter, finalInput, supabase]);
 
   useEffect(() => {
     const theOutput = setTimeout(() => {
