@@ -75,10 +75,10 @@ export default function LandingPage() {
         <div className="mt-16 w-full max-w-5xl mx-auto relative rounded-xl border border-gray-200 shadow-2xl overflow-hidden bg-gray-50">
            {/* If you don't have a dashboard screenshot, you can use your house image here */}
            <Image 
-             src="/ahouse.jpg" 
+             src="/EstateHub_logo.png" 
              alt="App Screenshot" 
              width={1200} 
-             height={600}
+             height={650}
              className="w-full h-auto object-cover opacity-90"
              priority
            />
