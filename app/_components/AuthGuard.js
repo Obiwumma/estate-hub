@@ -9,7 +9,7 @@ export default function AuthGuard({ children }) {
   const pathname = usePathname();
 
   // 1. Define Public Paths
-  const publicPaths = ["/login", "/signup", "/auth/login", "/auth/signup", "/"];
+  const publicPaths = [ "/properties", "/auth/login", "/auth/signup", ];
   const isProtected = !publicPaths.includes(pathname);
 
   // 2. THE FIX: Initialize 'loading' based on whether the page IS protected.
