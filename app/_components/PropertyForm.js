@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -9,6 +10,7 @@ import { addProperty, updateProperty } from "@/lib/action";
 import { Label } from "@/components/ui/label"; // Assuming you have a Label component, if not use standard <label>
 
 function PropertyForm({ mode = "create", property }) {
+  const router = useRouter()
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({}); // 1. Error State
   const [images, setImages] = useState(null);
@@ -80,14 +82,23 @@ function PropertyForm({ mode = "create", property }) {
     setLoading(true);
 
     try {
-      // If editing, append ID
+      let result; // Store the result
+
       if (mode === "edit" && property?.id) {
         formData.append("id", property.id);
-        await updateProperty(formData);
+        result = await updateProperty(formData);
       } else {
-        await addProperty(formData);
+        result = await addProperty(formData);
       }
-      // Note: Redirect usually happens in the Server Action
+
+      // 3. CHECK RESULT
+      if (result?.error) {
+        alert(result.error); // Show actual server error
+      } else {
+        // Success! Navigate now.
+        router.push("/dashboard/my-properties"); // <--- Client-side redirect
+      }
+
     } catch (error) {
       console.error(error);
       alert("Something went wrong. Please try again.");
