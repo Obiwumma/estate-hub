@@ -13,16 +13,14 @@ export default function AuthGuard({ children }) {
   const publicPaths = ["/login", "/signup", "/auth/login", "/auth/signup", "/"];
   const isProtected = !publicPaths.includes(pathname);
 
-  // 1. THE FIX: If it is public, render immediately. 
-  // We do not wait for useEffect or State. We just show the page.
-  if (!isProtected) {
-    return <>{children}</>;
-  }
-
   useEffect(() => {
-    // 2. We removed the "if (!isProtected)" block from here entirely.
-    // The effect now ONLY handles checking the session for protected pages.
-    
+    // 1. If public, just ensure loading is false and stop
+    if (!isProtected) {
+      setLoading(false);
+      return;
+    }
+
+    // 2. If protected, check Supabase
     async function checkUser() {
       const { data } = await supabase.auth.getSession();
       if (!data.session) {
@@ -33,13 +31,20 @@ export default function AuthGuard({ children }) {
     }
 
     checkUser();
-  }, [router]); // Removed 'isProtected' dependency since we handle it above
+  }, [isProtected, router]); // Hook is always called now
 
-  // 3. Render Logic for Protected Pages
-  if (loading) {
-    return <div className="p-8">Loading...</div>; 
+  // 3. RENDER LOGIC (Happens AFTER hooks)
+  
+  // If public, show content immediately
+  if (!isProtected) {
+    return <>{children}</>;
   }
 
-  // User is authenticated
+  // If protected and checking, show loader
+  if (loading) {
+    return <div className="p-8 flex justify-center">Loading...</div>;
+  }
+
+  // If protected and logged in, show content
   return <>{children}</>;
 }
