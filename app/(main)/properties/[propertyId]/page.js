@@ -26,7 +26,14 @@ export default function PropertyDetail() {
     if (propertyId) fetchProperty();
   }, [propertyId]);
 
-  if (loading) return <div>Loading details...</div>;
+  if (loading) {
+    return (
+      <div className="max-w-3xl mx-auto p-4 md:p-6 space-y-6">
+        <div className="h-8 w-48 bg-gray-200 animate-pulse rounded"></div>
+        <div className="h-96 w-full bg-gray-100 animate-pulse rounded-xl"></div>
+      </div>
+    )
+  }
   if (!property) return <div>Property not found</div>;
 
   const images = property.image_url ? JSON.parse(property.image_url) : [];
